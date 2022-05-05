@@ -1,0 +1,31 @@
+{
+  "name": "@bici/x-components",
+  "version": "1.0.0",
+  "description": "基于antd封装的增强组件以及其他的一些公共组件，纯UI组件",
+  "keywords": [
+    "antd"
+  ],
+  "author": "jufeng <jufeng@bicitech.cn>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "lib/x-components.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "module": "es/index.js",
+    "typings": "es/index.d.ts",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@bici/utils": "1.0.0"
+  }
+}
