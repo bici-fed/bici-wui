@@ -1,20 +1,16 @@
 ---
-title: Foo - 测试demo
-group:
-  path: /business
-  title: 业务组件(bus-components)
 nav:
-  title: 组件
+  title: Components
   path: /components
 ---
 
-## Foo2
+## Foo
 
 Demo:
 
 ```tsx
 import React from 'react';
-import { Foo } from '@bicitech/bus-components';
+import { Foo } from '@bicitech/x-components';
 
 export default () => <Foo title="First Demo" />;
 ```

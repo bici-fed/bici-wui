@@ -1,11 +1,11 @@
-# `@bici/bus-components`
+# `@bicitech/bus-components`
 
 > TODO: description
 
 ## Usage
 
 ```
-const busComponents = require('@bici/bus-components');
+const busComponents = require('@bicitech/bus-components');
 
 // TODO: DEMONSTRATE API
 ```

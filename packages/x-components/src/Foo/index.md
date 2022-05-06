@@ -1,6 +1,10 @@
 ---
+title: Foo - 测试demo
+group:
+  path: /antdx
+  title: 基础组件(x-components)
 nav:
-  title: Components
+  title: 组件
   path: /components
 ---
 
@@ -10,7 +14,7 @@ Demo:
 
 ```tsx
 import React from 'react';
-import { Foo } from 'bici-wui';
+import { Foo } from '@bicitech/x-components';
 
 export default () => <Foo title="First Demo" />;
 ```

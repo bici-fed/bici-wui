@@ -1,5 +1,5 @@
 {
-  "name": "@bici/bus-components",
+  "name": "@bicitech/bus-components",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "jufeng <jufeng@bicitech.cn>",
@@ -23,7 +23,11 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@bici/utils": "1.0.0",
-    "@bici/x-components": "1.0.0"
+    "@bicitech/utils": "1.0.0",
+    "@bicitech/x-components": "1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bici-fed/bici-wui"
   }
 }

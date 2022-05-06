@@ -2,6 +2,6 @@
 
 const busComponents = require('..');
 
-describe('@bici/bus-components', () => {
+describe('@bicitech/bus-components', () => {
   it('needs tests');
 });

@@ -1,22 +1,22 @@
 ---
-title: Foo - 测试demo
+title: Button - 增强
 group:
-  path: /business
-  title: 业务组件(bus-components)
+  path: /antdx
+  title: 基础组件(x-components)
 nav:
   title: 组件
   path: /components
 ---
 
-## Foo2
+## Button
 
 Demo:
 
 ```tsx
 import React from 'react';
-import { Foo } from '@bicitech/bus-components';
+import { Button } from '@bicitech/x-components';
 
-export default () => <Foo title="First Demo" />;
+export default () => <Button />;
 ```
 
 More skills for writing demo: https://d.umijs.org/guide/basic#write-component-demo

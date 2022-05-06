@@ -1,11 +1,11 @@
-# `@bici/x-components`
+# `@bicitech/x-components`
 
 > TODO: description
 
 ## Usage
 
 ```
-const xComponents = require('@bici/x-components');
+const xComponents = require('@bicitech/x-components');
 
 // TODO: DEMONSTRATE API
 ```
