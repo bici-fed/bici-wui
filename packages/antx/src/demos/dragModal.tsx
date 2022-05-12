@@ -24,8 +24,11 @@ const ModalDemo = () => {
 
   return (
     <>
-      <Button onClick={showModal}>Open Draggable Modal1</Button>
+      <Button onClick={showModal} type="primary">
+        打开对话框
+      </Button>
       <Modal
+        draggable={true}
         width={1000}
         title={<div style={{ color: 'red' }}>基本使用modal</div>}
         onCancel={handleCancel}

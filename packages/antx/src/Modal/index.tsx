@@ -9,7 +9,6 @@ export type { WuiModalProps };
 
 class Modal extends React.Component<WuiModalProps<ModalProps>> {
   state = {
-    disabled: true,
     bounds: { left: 0, top: 0, bottom: 0, right: 0 },
   };
 
@@ -32,8 +31,9 @@ class Modal extends React.Component<WuiModalProps<ModalProps>> {
   };
 
   render() {
-    const { bounds, disabled } = this.state;
+    const { bounds } = this.state;
     const restProps = _.omit(this.props, ['modalRender', 'title']);
+    const { draggable } = this.props;
     return (
       <>
         <ANTModal
@@ -41,20 +41,10 @@ class Modal extends React.Component<WuiModalProps<ModalProps>> {
             <div
               style={{
                 width: '100%',
-                cursor: 'move',
+                cursor: draggable ? 'move' : 'default',
               }}
-              onMouseOver={() => {
-                if (disabled) {
-                  this.setState({
-                    disabled: false,
-                  });
-                }
-              }}
-              onMouseOut={() => {
-                this.setState({
-                  disabled: true,
-                });
-              }}
+              onMouseOver={() => {}}
+              onMouseOut={() => {}}
               // fix eslintjsx-a11y/mouse-events-have-key-events
               // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
               onFocus={() => {}}
@@ -67,7 +57,7 @@ class Modal extends React.Component<WuiModalProps<ModalProps>> {
           {...restProps}
           modalRender={(modal) => (
             <Draggable
-              disabled={disabled}
+              disabled={!draggable}
               bounds={bounds}
               onStart={(event, uiData) => this.onStart(event, uiData)}
             >
