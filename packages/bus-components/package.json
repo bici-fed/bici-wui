@@ -1,8 +1,8 @@
 {
-  "name": "@bicitech/bus-components",
+  "name": "@bici-wui/bus-components",
   "version": "1.0.0",
   "description": "> TODO: description",
-  "author": "jufeng <jufeng@bicitech.cn>",
+  "author": "jufeng <jufeng@bici-wui.cn>",
   "homepage": "",
   "license": "ISC",
   "main": "lib/bus-components.js",
@@ -23,8 +23,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@bicitech/utils": "1.0.0",
-    "@bicitech/x-components": "1.0.0"
+    "@bici-wui/utils": "1.0.0",
+    "@bici-wui/antx": "1.0.0"
   },
   "repository": {
     "type": "git",

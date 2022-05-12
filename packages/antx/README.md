@@ -1,11 +1,11 @@
-# `@bici-wui/utils`
+# `@bici-wui/antx`
 
 > TODO: description
 
 ## Usage
 
 ```
-const utils = require('@bici-wui/utils');
+const xComponents = require('@bici-wui/antx');
 
 // TODO: DEMONSTRATE API
 ```

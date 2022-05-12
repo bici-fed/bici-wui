@@ -10,7 +10,7 @@ Demo:
 
 ```tsx
 import React from 'react';
-import { Foo } from '@bicitech/x-components';
+import { Foo } from '@bici-wui/antx';
 
 export default () => <Foo title="First Demo" />;
 ```

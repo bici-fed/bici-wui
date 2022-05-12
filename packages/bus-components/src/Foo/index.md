@@ -14,7 +14,7 @@ Demo:
 
 ```tsx
 import React from 'react';
-import { Foo } from '@bicitech/bus-components';
+import { Foo } from '@bici-wui/bus-components';
 
 export default () => <Foo title="First Demo" />;
 ```

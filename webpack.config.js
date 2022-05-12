@@ -18,7 +18,7 @@ const externals = isCI
   ? tailPkgs.reduce((pre, value) => {
       return {
         ...pre,
-        [`@bicitech/buici-${value}`]: `Bus${value
+        [`@bici-wui/buici-${value}`]: `Bus${value
           .toLowerCase()
           .replace(/( |^)[a-z]/g, (L) => L.toUpperCase())}`,
       };

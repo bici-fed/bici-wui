@@ -2,7 +2,7 @@
 title: Button - 增强
 group:
   path: /antdx
-  title: 基础组件(x-components)
+  title: 基础组件(antx)
 nav:
   title: 组件
   path: /components
@@ -14,7 +14,7 @@ Demo:
 
 ```tsx
 import React from 'react';
-import { Button } from '@bicitech/x-components';
+import { Button } from '@bici-wui/antx';
 
 export default () => <Button />;
 ```

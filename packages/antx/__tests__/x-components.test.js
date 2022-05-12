@@ -2,6 +2,6 @@
 
 const xComponents = require('..');
 
-describe('@bicitech/x-components', () => {
+describe('@bici-wui/antx', () => {
   it('needs tests');
 });

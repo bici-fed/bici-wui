@@ -2,6 +2,6 @@
 
 const utils = require('..');
 
-describe('@bicitech/utils', () => {
+describe('@bici-wui/utils', () => {
   it('needs tests');
 });
