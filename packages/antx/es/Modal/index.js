@@ -18,6 +18,49 @@ function _typeof(obj) {
   );
 }
 
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly &&
+      (symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })),
+      keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2
+      ? ownKeys(Object(source), !0).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        })
+      : Object.getOwnPropertyDescriptors
+      ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+      : ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+  }
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError('Cannot call a class as a function');
@@ -115,11 +158,9 @@ function _getPrototypeOf(o) {
 }
 
 import React from 'react';
-import { Modal as ANTModal, Button } from 'antd';
+import { Modal as ANTModal } from 'antd';
 import Draggable from 'react-draggable';
-export var WuiModal = function WuiModal(props) {
-  return /*#__PURE__*/ React.createElement('div', null, 'asasa');
-};
+import _ from 'lodash';
 
 var Modal = /*#__PURE__*/ (function (_React$Component) {
   _inherits(Modal, _React$Component);
@@ -137,8 +178,6 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
 
     _this = _super.call.apply(_super, [this].concat(args));
     _this.state = {
-      visible: false,
-      disabled: true,
       bounds: {
         left: 0,
         top: 0,
@@ -147,28 +186,6 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
       },
     };
     _this.draggleRef = /*#__PURE__*/ React.createRef();
-
-    _this.showModal = function () {
-      _this.setState({
-        visible: true,
-      });
-    };
-
-    _this.handleOk = function (e) {
-      console.log(e);
-
-      _this.setState({
-        visible: false,
-      });
-    };
-
-    _this.handleCancel = function (e) {
-      console.log(e);
-
-      _this.setState({
-        visible: false,
-      });
-    };
 
     _this.onStart = function (event, uiData) {
       var _this$draggleRef$curr;
@@ -205,83 +222,62 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
       value: function render() {
         var _this2 = this;
 
-        var _this$state = this.state,
-          bounds = _this$state.bounds,
-          disabled = _this$state.disabled,
-          visible = _this$state.visible;
+        var bounds = this.state.bounds;
+
+        var restProps = _.omit(this.props, ['modalRender', 'title']);
+
+        var draggable = this.props.draggable;
         return /*#__PURE__*/ React.createElement(
           React.Fragment,
           null,
           /*#__PURE__*/ React.createElement(
-            Button,
-            {
-              onClick: this.showModal,
-            },
-            'Open Draggable Modal',
-          ),
-          /*#__PURE__*/ React.createElement(
             ANTModal,
-            {
-              title: /*#__PURE__*/ React.createElement(
-                'div',
+            _objectSpread(
+              _objectSpread(
                 {
-                  style: {
-                    width: '100%',
-                    cursor: 'move',
-                  },
-                  onMouseOver: function onMouseOver() {
-                    if (disabled) {
-                      _this2.setState({
-                        disabled: false,
-                      });
-                    }
-                  },
-                  onMouseOut: function onMouseOut() {
-                    _this2.setState({
-                      disabled: true,
-                    });
-                  },
-                  // fix eslintjsx-a11y/mouse-events-have-key-events
-                  // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
-                  onFocus: function onFocus() {},
-                  onBlur: function onBlur() {},
-                },
-                'Draggable Modal',
-              ),
-              visible: visible,
-              onOk: this.handleOk,
-              onCancel: this.handleCancel,
-              modalRender: function modalRender(modal) {
-                return /*#__PURE__*/ React.createElement(
-                  Draggable,
-                  {
-                    disabled: disabled,
-                    bounds: bounds,
-                    onStart: function onStart(event, uiData) {
-                      return _this2.onStart(event, uiData);
-                    },
-                  },
-                  /*#__PURE__*/ React.createElement(
+                  title: /*#__PURE__*/ React.createElement(
                     'div',
                     {
-                      ref: _this2.draggleRef,
+                      style: {
+                        width: '100%',
+                        cursor: draggable ? 'move' : 'default',
+                      },
+                      onMouseOver: function onMouseOver() {},
+                      onMouseOut: function onMouseOut() {},
+                      // fix eslintjsx-a11y/mouse-events-have-key-events
+                      // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
+                      onFocus: function onFocus() {},
+                      onBlur: function onBlur() {},
                     },
-                    modal,
+                    this.props.title,
                   ),
-                );
+                },
+                restProps,
+              ),
+              {},
+              {
+                modalRender: function modalRender(modal) {
+                  return /*#__PURE__*/ React.createElement(
+                    Draggable,
+                    {
+                      disabled: !draggable,
+                      bounds: bounds,
+                      onStart: function onStart(event, uiData) {
+                        return _this2.onStart(event, uiData);
+                      },
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      'div',
+                      {
+                        ref: _this2.draggleRef,
+                      },
+                      modal,
+                    ),
+                  );
+                },
               },
-            },
-            /*#__PURE__*/ React.createElement(
-              'p',
-              null,
-              "Just don't learn physics at school and your life will be full of magic and miracles.",
             ),
-            /*#__PURE__*/ React.createElement('br', null),
-            /*#__PURE__*/ React.createElement(
-              'p',
-              null,
-              'Day before yesterday I saw a rabbit, and yesterday a deer, and today, you.',
-            ),
+            this.props.children,
           ),
         );
       },
