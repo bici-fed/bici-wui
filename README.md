@@ -1,5 +1,7 @@
 # bici-wui
 
+## [文档](https://bici-fed.github.io/bici-wui/)
+
 ## Getting Started
 
 Install dependencies,
