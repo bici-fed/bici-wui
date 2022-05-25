@@ -1,1 +1,1 @@
-export * from './BaseRequest/request';
+export * from './BaseRequest';

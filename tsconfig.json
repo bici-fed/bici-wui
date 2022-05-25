@@ -8,6 +8,16 @@
     "types": ["jest"],
     "strict": true,
     "skipLibCheck": true,
-    "declaration": true
-  }
+    "declaration": true,
+    "noImplicitReturns": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noImplicitAny": true,
+    "paths": {
+      "@bici-wui/utils": ["./packages/utils/src/index.ts"],
+      "@bici-wui/antx": ["./packages/antx/src/index.ts"],
+      "@bici-wui/bus-compnents": ["./packages/bus-components/src/index.ts"]
+    }
+  },
+  "include": ["typings.d.ts", "**/src/**/*", ".eslintrc.js"],
+  "plugins": [{ "transform": "typescript-transform-paths", "afterDeclarations": true }]
 }
