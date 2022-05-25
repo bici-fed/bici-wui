@@ -1,4 +1,5 @@
 import type { UploadChangeParam, UploadListProps, UploadProps } from 'antd/lib/upload';
+import { downloadById } from './util';
 
 export type WuiUploadProps<T> = {
   /**
@@ -16,4 +17,39 @@ export type WuiUploadProps<T> = {
    */
   mappingId: string;
   token: string;
+  /**
+   *
+   * @description 文件上传大小限制，默认为0，则上传大小限制服务端控制
+   * @description.zh-CN a
+   * @default 0
+   */
+  maxSize: number;
+  /**
+   *
+   * @description 文件超过大小限制后的提示信息
+   * @description.zh-CN a
+   * @default 0
+   */
+  maxSizeOverflowWarning?: string;
+  /**
+   *
+   * @description 文件上传路径
+   * @description.zh-CN a
+   * @default 0
+   */
+  action: string;
+  /**
+   *
+   * @description 文件下载路径
+   * @description.zh-CN a
+   * @default 0
+   */
+  downloadAction: string;
+  /**
+   *
+   * @description 文件删除路径
+   * @description.zh-CN a
+   * @default 0
+   */
+  deleteAction: string;
 } & Omit<UploadProps, 'mappingType' | 'mappingId' | 'token'>;

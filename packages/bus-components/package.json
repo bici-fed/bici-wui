@@ -11,7 +11,7 @@
     "test": "__tests__"
   },
   "module": "es/index.js",
-    "typings": "es/index.d.ts",
+  "typings": "es/index.d.ts",
   "files": [
     "lib",
     "es"
@@ -23,8 +23,9 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
+    "@bici-wui/antx": "1.0.0",
     "@bici-wui/utils": "1.0.0",
-    "@bici-wui/antx": "1.0.0"
+    "omit": "^1.0.1"
   },
   "repository": {
     "type": "git",
