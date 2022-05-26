@@ -8,16 +8,14 @@
   "author": "jufeng <jufeng@bici-wui.cn>",
   "homepage": "",
   "license": "MIT",
-  "main": "lib/antx.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
+  "main": "lib/index.js",
   "module": "es/index.js",
-  "typings": "es/index.d.ts",
+  "types": "lib/index.d.ts",
   "files": [
     "lib",
-    "es"
+    "es",
+    "src",
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
@@ -26,6 +24,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
+    "@babel/runtime": "^7.18.3",
     "@bici-wui/utils": "1.0.0",
     "lodash": "^4.17.21",
     "react-draggable": "^4.4.5"

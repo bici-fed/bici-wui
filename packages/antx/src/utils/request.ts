@@ -74,13 +74,13 @@ const client = new BaseRequest({
   },
 });
 
-export const http = <_D, T = any>(config: CommonRequestConfig) => {
+export const http = (config: CommonRequestConfig) => {
   const { method = 'GET', url } = config;
   console.log('http>>>>>>>>>>>>>');
   if (method === 'get' || method === 'GET') {
     config.params = config.data || {};
   }
-  return client.request<T>(config);
+  return client.request(config);
 };
 
 export default http;

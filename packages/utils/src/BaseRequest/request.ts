@@ -1,5 +1,6 @@
 import axios from 'axios';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelTokenSource } from 'axios';
+import { omit } from 'lodash';
 
 export interface RequestInterceptors {
   // 请求拦截器
@@ -16,10 +17,13 @@ export interface RequestConfig extends AxiosRequestConfig {
 }
 // 我们使用url做key， key不固定
 export interface CancelRequestSource {
-  [key: string]: () => void;
+  [index: string]: () => void;
 }
 
-class BaseRequest {
+/**
+ * 请求拦截
+ */
+export class BaseRequest {
   // axios实例
   instance: AxiosInstance;
   // 拦截器对象
@@ -42,7 +46,10 @@ class BaseRequest {
   requestUrlList?: string[];
 
   constructor(config: RequestConfig) {
-    this.instance = axios.create(config);
+    const axiosConfig: AxiosRequestConfig = {
+      ...omit(config, ['nterceptors']),
+    };
+    this.instance = axios.create(axiosConfig);
     this.interceptorsObj = config.interceptors;
     // 类拦截器
     this.instance.interceptors.request.use((res: AxiosRequestConfig) => {
@@ -62,9 +69,12 @@ class BaseRequest {
     // 全局拦截器保证最后执行
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
-        return res?.data;
+        console.log('---全局响应拦截器---');
+        console.log(res);
+        return res;
       },
       (err: any) => {
+        console.log('err>>>', err);
         return err;
       },
     );
@@ -120,11 +130,14 @@ class BaseRequest {
    * @private
    */
   private delUrl(url: string) {
+    console.log('delUrl>>', url);
     const urlIndex: number = this.requestUrlList?.findIndex((u) => u === url) as number;
     const sourceIndex = this.getSourceIndex(url);
     // 删除url和cancel方法
-    urlIndex !== -1 && Array.prototype.splice.call(this.requestUrlList, urlIndex, 1);
-    sourceIndex !== -1 && Array.prototype.splice.call(this.cancelRequestSourceList, sourceIndex, 1);
+    // noinspection TypeScriptValidateTypes
+    sourceIndex !== -1 && this.requestUrlList?.splice(urlIndex as number, 1);
+    // noinspection TypeScriptValidateTypes
+    sourceIndex !== -1 && this.cancelRequestSourceList?.splice(sourceIndex as number, 1);
   }
 
   /**
@@ -143,12 +156,10 @@ class BaseRequest {
       sourceIndex >= 0 && this.cancelRequestSourceList?.[sourceIndex][url]();
     } else {
       // 存在多个需要取消请求的地址
-      url.forEach((u) => {
-        const sourceIndex = this.getSourceIndex(u);
-        sourceIndex >= 0 && this.cancelRequestSourceList?.[sourceIndex][url]();
+      url.forEach((uri) => {
+        const sourceIndex = this.getSourceIndex(uri);
+        sourceIndex >= 0 && this.cancelRequestSourceList?.[sourceIndex][uri]();
       });
     }
   }
 }
-
-export default BaseRequest;
