@@ -16,3 +16,16 @@ Object.keys(_BaseRequest).forEach(function (key) {
     },
   });
 });
+
+var _Socket = require('./Socket');
+
+Object.keys(_Socket).forEach(function (key) {
+  if (key === 'default' || key === '__esModule') return;
+  if (key in exports && exports[key] === _Socket[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _Socket[key];
+    },
+  });
+});
