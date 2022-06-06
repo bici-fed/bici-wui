@@ -79,7 +79,11 @@ export const http = <_D, T = any>(config: CommonRequestConfig) => {
   console.log('http>>>>>>>>>>>>>');
   if (method === 'get' || method === 'GET') {
     config.params = config.data || {};
+    // https://github.com/axios/axios/issues/4658
+    // get 请求不能有body
+    config.data = undefined;
   }
+  console.log(JSON.stringify(config));
   return client.request<T>(config);
 };
 
