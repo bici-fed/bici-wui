@@ -1,3 +1,18 @@
+---
+title: BaseRequest
+group:
+  path: /utils
+  title: 工具(utils)
+nav:
+  title: 组件
+  path: /components
+---
+
+## 文件上传
+
+#### 实例化基础请求类
+
+```ts
 import { BaseRequest } from '@bici-wui/utils';
 import type { RequestInterceptors, RequestConfig } from '@bici-wui/utils';
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, CancelTokenSource } from 'axios';
@@ -74,13 +89,41 @@ const client = new BaseRequest({
   },
 });
 
-export const http = (config: CommonRequestConfig) => {
+export const http = <_D, T = any>(config: CommonRequestConfig) => {
   const { method = 'GET', url } = config;
   console.log('http>>>>>>>>>>>>>');
   if (method === 'get' || method === 'GET') {
     config.params = config.data || {};
+    // https://github.com/axios/axios/issues/4658
+    // get 请求不能有body
+    config.data = undefined;
   }
-  return client.request(config);
+  console.log(JSON.stringify(config));
+  return client.request<T>(config);
 };
 
 export default http;
+```
+
+#### 请求案例
+
+```ts
+import http from '../utils/request';
+// 下载附件
+export const downloadById = (params: any) => {
+  return http({
+    url: '/file/service/file/downloadById',
+    method: 'get',
+    data: params,
+    quiet: true,
+    interceptors: {
+      requestInterceptors: (config) => {
+        console.log('单个拦截器');
+        return config;
+      },
+    },
+  });
+};
+```
+
+#### API
