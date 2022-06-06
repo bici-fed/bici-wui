@@ -17,7 +17,7 @@ if (type === 'lib') {
   config = {
     cjs: { type: 'babel', lazy: true },
     esm: false,
-    runtimeHelpers: false,
+    runtimeHelpers: true,
     pkgs: [...headPkgs, ...tailPkgs],
     extraBabelPlugins: [
       ['babel-plugin-import', { libraryName: 'antd', libraryDirectory: 'es', style: true }, 'antd'],

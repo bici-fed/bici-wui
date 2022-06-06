@@ -120,7 +120,7 @@ const BiciUpload: React.FC<WuiUploadProps<UploadProps>> = (props) => {
   const onDownload = async (file: { uid: any; name: any }) => {
     const { uid: id, name } = file;
     const url = await downloadById({ id });
-    const res = await fetch(url);
+    const res = await fetch(url as Request | string);
     const blob = await res.blob();
     const objectUrl = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
