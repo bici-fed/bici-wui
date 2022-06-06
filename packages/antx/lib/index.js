@@ -12,6 +12,7 @@ var _exportNames = {
   Modal: true,
   Button: true,
   Upload: true,
+  Notification: true,
 };
 Object.defineProperty(exports, 'Button', {
   enumerable: true,
@@ -29,6 +30,12 @@ Object.defineProperty(exports, 'Modal', {
   enumerable: true,
   get: function get() {
     return _Modal.default;
+  },
+});
+Object.defineProperty(exports, 'Notification', {
+  enumerable: true,
+  get: function get() {
+    return _Notification.default;
   },
 });
 Object.defineProperty(exports, 'Upload', {
@@ -57,3 +64,5 @@ Object.keys(_Upload).forEach(function (key) {
     },
   });
 });
+
+var _Notification = _interopRequireDefault(require('./Notification'));
