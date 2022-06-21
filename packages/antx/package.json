@@ -27,6 +27,9 @@
     "@babel/runtime": "^7.18.3",
     "@bici-wui/utils": "1.0.0",
     "lodash": "^4.17.21",
+    "masonic": "^3.6.5",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-draggable": "^4.4.5"
   },
   "repository": {

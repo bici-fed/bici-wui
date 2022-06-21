@@ -1,32 +1,15 @@
 'use strict';
 
+var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault').default;
+
 Object.defineProperty(exports, '__esModule', {
   value: true,
 });
-exports.default = exports.ReadyState = void 0;
+exports.Socket = exports.ReadyState = void 0;
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError('Cannot call a class as a function');
-  }
-}
+var _classCallCheck2 = _interopRequireDefault(require('@babel/runtime/helpers/classCallCheck'));
 
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ('value' in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  Object.defineProperty(Constructor, 'prototype', { writable: false });
-  return Constructor;
-}
+var _createClass2 = _interopRequireDefault(require('@babel/runtime/helpers/createClass'));
 
 var ReadyState;
 exports.ReadyState = ReadyState;
@@ -36,7 +19,43 @@ exports.ReadyState = ReadyState;
   ReadyState[(ReadyState['Open'] = 1)] = 'Open';
   ReadyState[(ReadyState['Closing'] = 2)] = 'Closing';
   ReadyState[(ReadyState['Closed'] = 3)] = 'Closed';
-})(ReadyState || (exports.ReadyState = ReadyState = {}));
+})(ReadyState || (exports.ReadyState = ReadyState = {})); // 心跳检测
+// 心跳重连时候分2种情况：
+//   A.正常情况下：websocket.send('HeartBeat') 后，reset()，会先 stop() 后 start()，注意！：stop 只是清了计时器，
+//   而 start 没有重新创建新的 WS 实例！，也就是说，正常情况下不会触发 onClose ；
+//   B.异常情况下，当 websocket.send('HeartBeat') 触发 onError，会进行尝试重连，这个时候如果“尝试连接”失败，
+//   会触发 onClose，此时的 readyState 是 CLOSED；
+
+function heartCheck(type) {
+  var _this = this;
+
+  var that = this;
+  var _this$options = this.options,
+    heartCheckInterval = _this$options.heartCheckInterval,
+    debug = _this$options.debug;
+
+  switch (type) {
+    case 'start':
+      this.heartCheckTimeoutTimer = setTimeout(function () {
+        that.instance.send('HeartBeat');
+        debug && console.log('WebSocket: Send HeartBeat!');
+        heartCheck.call(_this, 'reset');
+      }, heartCheckInterval);
+      break;
+
+    case 'stop':
+      window.clearTimeout(this.heartCheckTimeoutTimer);
+      break;
+
+    case 'reset':
+      heartCheck.call(this, 'stop');
+      heartCheck.call(this, 'start');
+      break;
+
+    default:
+      break;
+  }
+}
 /**
  * 基本websocket链接类
  */
@@ -47,10 +66,9 @@ var Socket = /*#__PURE__*/ (function () {
   // 重连定时器
   // 最新消息
   function Socket(socketUrl, options) {
-    var _this = this;
+    var _this2 = this;
 
-    _classCallCheck(this, Socket);
-
+    (0, _classCallCheck2.default)(this, Socket);
     this.options = void 0;
     this.socketUrl = void 0;
     this.instance = void 0;
@@ -60,24 +78,33 @@ var Socket = /*#__PURE__*/ (function () {
     this.latestMessage = null;
 
     this.sendMessage = function (message) {
-      if (_this.readyState === ReadyState.Open) {
-        _this.instance.send(message);
+      if (_this2.readyState === ReadyState.Open) {
+        _this2.instance.send(message);
       } else {
         throw new Error('WebSocket disconnected');
       }
     };
 
     this.disconnect = function () {
-      if (_this.reconnectTimer) {
-        clearTimeout(_this.reconnectTimer);
+      if (_this2.reconnectTimer) {
+        clearTimeout(_this2.reconnectTimer);
       }
 
-      _this.reconnectTimes = _this.options.reconnectLimit;
+      _this2.reconnectTimes = _this2.options.reconnectLimit;
 
-      _this.instance.close();
+      _this2.instance.close();
     };
 
-    this.options = options;
+    this.options = Object.assign(
+      {
+        reconnectLimit: 3,
+        reconnectInterval: 2000,
+        manual: false,
+        heartCheckInterval: 20000,
+        debug: false,
+      },
+      options,
+    );
     this.socketUrl = socketUrl;
 
     if (!options.manual) {
@@ -85,11 +112,15 @@ var Socket = /*#__PURE__*/ (function () {
     }
   }
 
-  _createClass(Socket, [
+  (0, _createClass2.default)(Socket, [
     {
       key: 'init',
       value: function init() {
         this.connect();
+
+        if (!this.instance) {
+          this.reconnect();
+        }
       },
       /**
        * 重新连接
@@ -98,7 +129,7 @@ var Socket = /*#__PURE__*/ (function () {
     {
       key: 'reconnect',
       value: function reconnect() {
-        var _this2 = this;
+        var _this3 = this;
 
         if (
           this.reconnectTimes &&
@@ -111,80 +142,93 @@ var Socket = /*#__PURE__*/ (function () {
 
           this.reconnectTimer = setTimeout(function () {
             // eslint-disable-next-line @typescript-eslint/no-use-before-define
-            _this2.connectWs();
+            _this3.connectWs();
 
-            _this2.reconnectTimes++;
+            _this3.reconnectTimes++;
           }, this.options.reconnectInterval);
         }
       },
+      /**
+       * 连接webscoket
+       */
     },
     {
       key: 'connectWs',
-      value:
-        /**
-         * 连接webscoket
-         */
-        function connectWs() {
-          var _this3 = this;
+      value: function connectWs() {
+        var _this4 = this;
 
-          if (this.reconnectTimer) {
-            clearTimeout(this.reconnectTimer);
-          }
+        if (this.reconnectTimer) {
+          clearTimeout(this.reconnectTimer);
+        }
 
-          if (this.instance) {
-            this.instance.close();
-          }
+        if (this.instance) {
+          this.instance.close();
+        }
 
-          var ws = new WebSocket(this.socketUrl);
-          this.readyState = ReadyState.Connecting;
+        var ws = new WebSocket(this.socketUrl);
+        this.readyState = ReadyState.Connecting;
 
-          ws.onerror = function (event) {
-            var _this3$options$onErro, _this3$options;
+        ws.onerror = function (event) {
+          var _this4$options$onErro, _this4$options;
 
-            _this3.reconnect();
+          console.log('onerror....');
 
-            (_this3$options$onErro = (_this3$options = _this3.options).onError) === null ||
-            _this3$options$onErro === void 0
-              ? void 0
-              : _this3$options$onErro.call(_this3$options, event, ws);
-            _this3.readyState = ws.readyState || ReadyState.Closed;
-          };
+          _this4.reconnect();
 
-          ws.onopen = function (event) {
-            var _this3$options$onOpen, _this3$options2;
+          (_this4$options$onErro = (_this4$options = _this4.options).onError) === null ||
+          _this4$options$onErro === void 0
+            ? void 0
+            : _this4$options$onErro.call(_this4$options, event, ws);
+          _this4.readyState = ws.readyState || ReadyState.Closed;
+        };
 
-            (_this3$options$onOpen = (_this3$options2 = _this3.options).onOpen) === null ||
-            _this3$options$onOpen === void 0
-              ? void 0
-              : _this3$options$onOpen.call(_this3$options2, event, ws);
-            _this3.reconnectTimes = 0;
-            _this3.readyState = ws.readyState || ReadyState.Open;
-          };
+        ws.onopen = function (event) {
+          var _this4$options$onOpen, _this4$options2;
 
-          ws.onmessage = function (message) {
-            var _this3$options$onOpen2, _this3$options3;
+          console.log('onopen....');
+          heartCheck.call(_this4, 'start'); //开始心跳检测
 
-            (_this3$options$onOpen2 = (_this3$options3 = _this3.options).onOpen) === null ||
-            _this3$options$onOpen2 === void 0
-              ? void 0
-              : _this3$options$onOpen2.call(_this3$options3, message, ws);
-            _this3.latestMessage = message;
-          };
+          (_this4$options$onOpen = (_this4$options2 = _this4.options).onOpen) === null ||
+          _this4$options$onOpen === void 0
+            ? void 0
+            : _this4$options$onOpen.call(_this4$options2, event, ws);
+          _this4.reconnectTimes = 0;
+          _this4.readyState = ws.readyState || ReadyState.Open;
+        };
 
-          ws.onclose = function (event) {
-            var _this3$options$onClos, _this3$options4;
+        ws.onmessage = function (message) {
+          var _this4$options$onOpen2, _this4$options3;
 
-            _this3.reconnect();
+          console.log('onmessage....');
+          heartCheck.call(_this4, 'reset');
+          (_this4$options$onOpen2 = (_this4$options3 = _this4.options).onOpen) === null ||
+          _this4$options$onOpen2 === void 0
+            ? void 0
+            : _this4$options$onOpen2.call(_this4$options3, message, ws);
+          _this4.latestMessage = message;
+        };
 
-            (_this3$options$onClos = (_this3$options4 = _this3.options).onClose) === null ||
-            _this3$options$onClos === void 0
-              ? void 0
-              : _this3$options$onClos.call(_this3$options4, event, ws);
-            _this3.readyState = ws.readyState || ReadyState.Closed;
-          };
+        ws.onclose = function (event) {
+          var _this4$options$onClos, _this4$options4;
 
-          this.instance = ws;
-        },
+          console.log('onclose....');
+          heartCheck.call(_this4, 'stop');
+
+          _this4.reconnect();
+
+          (_this4$options$onClos = (_this4$options4 = _this4.options).onClose) === null ||
+          _this4$options$onClos === void 0
+            ? void 0
+            : _this4$options$onClos.call(_this4$options4, event, ws);
+          _this4.readyState = ws.readyState || ReadyState.Closed;
+        };
+
+        this.instance = ws;
+      },
+      /**
+       *
+       * @param message 发送消息
+       */
     },
     {
       key: 'connect',
@@ -196,11 +240,12 @@ var Socket = /*#__PURE__*/ (function () {
           this.reconnectTimes = 0;
           this.connectWs();
         },
+      /**
+       * 取消连接
+       */
     },
   ]);
-
   return Socket;
 })();
 
-var _default = Socket;
-exports.default = _default;
+exports.Socket = Socket;

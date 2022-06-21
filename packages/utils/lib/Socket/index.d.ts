@@ -8,6 +8,8 @@ export interface Options {
   reconnectLimit?: number;
   reconnectInterval?: number;
   manual?: boolean;
+  heartCheckInterval?: number;
+  debug?: boolean;
   onOpen?: (event: WebSocketEventMap['open'], instance: WebSocket) => void;
   onClose?: (event: WebSocketEventMap['close'], instance: WebSocket) => void;
   onMessage?: (message: WebSocketEventMap['message'], instance: WebSocket) => void;
@@ -25,7 +27,7 @@ export interface Result {
 /**
  * 基本websocket链接类
  */
-declare class Socket {
+export declare class Socket {
   options: Options;
   socketUrl: string;
   instance: any;
@@ -57,4 +59,3 @@ declare class Socket {
    */
   disconnect: () => void;
 }
-export default Socket;

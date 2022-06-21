@@ -13,9 +13,9 @@ nav:
 #### 实例化基础请求类
 
 ```tsx
-import React from 'react';
-import { Button } from 'antd';
 import { Socket } from '@bici-wui/utils';
+import { Button } from 'antd';
+import React from 'react';
 
 const SocketDemo = () => {
   const [wsIn, setWsIn] = React.useState(null);
@@ -24,7 +24,7 @@ const SocketDemo = () => {
       'wss://zhsd-test.bicisims.com/api/websocket/service/websocket/alarm/1qCf6ylNuMFOqgP8EMU4Wt',
       {
         reconnectLimit: 10,
-        reconnectInterval: 3000,
+        reconnectInterval: 1000,
         manual: false,
       },
     );
@@ -34,7 +34,7 @@ const SocketDemo = () => {
   const sendMassage = () => {
     if (wsIn) {
       wsIn.init();
-      wsIn.sendMessage({ a: 1, b: 2 });
+      // wsIn.sendMessage({ a: 1, b: 2 });
     }
   };
 

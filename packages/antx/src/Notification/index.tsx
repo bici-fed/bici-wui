@@ -58,7 +58,7 @@ const handleNotificationOpen = (type: any, config: any) => {
     }
 
     const distConfig = {
-      placement: 'bottomLeft',
+      placement: 'topRight',
       duration: toSetDuration,
       onClose: () => {
         const toDeleteIndex = keyArr.findIndex((obj) => {

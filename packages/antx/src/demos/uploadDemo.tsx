@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Upload } from '@bici-wui/antx';
 import { Button } from 'antd';
+import React from 'react';
 
 /**
  * title: 我是标题
@@ -41,7 +41,7 @@ const UploadDemo = () => {
   return (
     <>
       <Upload {...p}>
-        <Button>点击文件删除</Button>
+        <Button>点击上传文件</Button>
       </Upload>
     </>
   );
