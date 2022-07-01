@@ -1,16 +1,16 @@
-import 'antd/es/upload/style';
-import _Upload from 'antd/es/upload';
-import _regeneratorRuntime from '@babel/runtime/regenerator';
 import _asyncToGenerator from '@babel/runtime/helpers/esm/asyncToGenerator';
 import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
+import _regeneratorRuntime from '@babel/runtime/helpers/esm/regeneratorRuntime';
 import _slicedToArray from '@babel/runtime/helpers/esm/slicedToArray';
+import _Upload from 'antd/es/upload';
+import 'antd/es/upload/style';
 
 /**
  * 文件上传
  */
-import React, { useState } from 'react';
 import 'antd/es/upload/style';
-import { downloadById, fileDelete, fetchUpload } from './util';
+import React, { useState } from 'react';
+import { downloadById, fetchUpload, fileDelete } from './util';
 
 var BiciUpload = function BiciUpload(props) {
   var _useState = useState([]),
@@ -143,9 +143,9 @@ var BiciUpload = function BiciUpload(props) {
 
   var onPreview = /*#__PURE__*/ (function () {
     var _ref2 = _asyncToGenerator(
-      /*#__PURE__*/ _regeneratorRuntime.mark(function _callee(file) {
+      /*#__PURE__*/ _regeneratorRuntime().mark(function _callee(file) {
         var id, previewImage;
-        return _regeneratorRuntime.wrap(function _callee$(_context) {
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch ((_context.prev = _context.next)) {
               case 0:
@@ -193,9 +193,9 @@ var BiciUpload = function BiciUpload(props) {
 
   var onRemove = /*#__PURE__*/ (function () {
     var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/ _regeneratorRuntime.mark(function _callee2(file) {
+      /*#__PURE__*/ _regeneratorRuntime().mark(function _callee2(file) {
         var id;
-        return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch ((_context2.prev = _context2.next)) {
               case 0:
@@ -224,9 +224,9 @@ var BiciUpload = function BiciUpload(props) {
 
   var onDownload = /*#__PURE__*/ (function () {
     var _ref4 = _asyncToGenerator(
-      /*#__PURE__*/ _regeneratorRuntime.mark(function _callee3(file) {
+      /*#__PURE__*/ _regeneratorRuntime().mark(function _callee3(file) {
         var id, name, url, res, blob, objectUrl, a;
-        return _regeneratorRuntime.wrap(function _callee3$(_context3) {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) {
             switch ((_context3.prev = _context3.next)) {
               case 0:

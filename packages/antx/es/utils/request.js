@@ -1,7 +1,7 @@
-import _objectWithoutProperties from '@babel/runtime/helpers/esm/objectWithoutProperties';
 import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
-var _excluded = ['code', 'msg', 'data'];
+import _objectWithoutProperties from '@babel/runtime/helpers/esm/objectWithoutProperties';
 import { BaseRequest } from '@bici-wui/utils';
+var _excluded = ['code', 'msg', 'data'];
 /**+++++++++++++++++++获得中航上大APP的请求实例对象，这部分和上面的Request类可以拆分+++++++++++++++++++++++++++++++++++*/
 // 封装请求方法
 

@@ -1,13 +1,13 @@
-import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
-import 'antd/es/modal/style';
-import _Modal from 'antd/es/modal';
 import _classCallCheck from '@babel/runtime/helpers/esm/classCallCheck';
 import _createClass from '@babel/runtime/helpers/esm/createClass';
-import _inherits from '@babel/runtime/helpers/esm/inherits';
 import _createSuper from '@babel/runtime/helpers/esm/createSuper';
+import _inherits from '@babel/runtime/helpers/esm/inherits';
+import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
+import _Modal from 'antd/es/modal';
+import 'antd/es/modal/style';
+import _ from 'lodash';
 import React from 'react';
 import Draggable from 'react-draggable';
-import _ from 'lodash';
 
 var Modal = /*#__PURE__*/ (function (_React$Component) {
   _inherits(Modal, _React$Component);

@@ -1,12 +1,13 @@
-import 'antd/es/notification/style';
-import _notification from 'antd/es/notification';
 import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
+import _notification from 'antd/es/notification';
+import 'antd/es/notification/style';
 var keyArr = []; // 存放通知框的key
 
 var delayArr = [8, 5, 2]; // 延时数组
 
 var handleNotificationOpen = function handleNotificationOpen(type, config) {
   var getNewConfig = function getNewConfig() {
+    // 根据是否传入description饭后新的配置项
     if (config.description) {
       return config;
     } else if (
@@ -60,7 +61,7 @@ var handleNotificationOpen = function handleNotificationOpen(type, config) {
 
     var distConfig = _objectSpread(
       {
-        placement: 'bottomLeft',
+        placement: 'topRight',
         duration: toSetDuration,
         onClose: function onClose() {
           var toDeleteIndex = keyArr.findIndex(function (obj) {
@@ -72,8 +73,9 @@ var handleNotificationOpen = function handleNotificationOpen(type, config) {
       item,
     );
 
-    switch (item.notyType) {
-      // 根据类型打开不同样式的消息通知
+    switch (
+      item.notyType // 根据类型打开不同样式的消息通知
+    ) {
       case 'open':
         _notification.open(distConfig);
 
