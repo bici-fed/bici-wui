@@ -1,6 +1,6 @@
 {
   "name": "@bici-wui/antx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "基于antd封装的增强组件以及其他的一些公共组件，纯UI组件",
   "keywords": [
     "antd"
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
-    "@bici-wui/utils": "1.0.0",
+    "@bici-wui/utils": "^1.0.1",
     "lodash": "^4.17.21",
     "masonic": "^3.6.5",
     "react-dnd": "^16.0.1",
