@@ -10,8 +10,8 @@ export const Dragger = function Dragger(option: DragProps) {
     end: (item, monitor, ...arg) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        console.log('source:', item);
-        console.log('target:', dropResult);
+        // console.log('source:', item);
+        // console.log('target:', dropResult);
       }
       if (onDragFinished) {
         onDragFinished(item, dropResult);
@@ -22,7 +22,7 @@ export const Dragger = function Dragger(option: DragProps) {
       handlerId: monitor.getHandlerId(),
     }),
   }));
-  const opacity = isDragging ? 0.4 : 1;
+  const opacity = isDragging ? 0 : 1;
   return (
     <div ref={drag} role={option.role} style={{ opacity }} data-id={`${option.name}`}>
       {option.content}
@@ -44,21 +44,22 @@ export const Acceptor = (option: AcceptorProps) => {
       canDrop: monitor.canDrop(),
     }),
   }));
+
   const isActive = canDrop && isOver;
   let backgroundColor = '#fff';
-  let border = '0px solid rgba(31, 92, 206, 0)';
+  let boxShadow = '0 0px 8px rgba(0, 0, 0, 0)';
   if (isActive) {
     backgroundColor = 'antiquewhite';
-    border = '1px solid #26BD11';
+    boxShadow = '0 0px 8px rgba(0, 0, 0, 0.3)';
   } else if (canDrop) {
     backgroundColor = '#fff';
-    border = '1px solid #2063AF';
+    boxShadow = '0px 0px 8px rgba(0, 0, 0, 0.2)';
   }
   return (
     <div
       ref={drop}
       role={'Acceptor'}
-      style={styleType === 'background' ? { backgroundColor } : { border }}
+      style={styleType === 'background' ? { backgroundColor } : { boxShadow }}
     >
       {option.content}
     </div>
@@ -72,6 +73,7 @@ export const dragList = (list: Array<any>, crtIndex: number, willIndex: number) 
   list.splice(delIndex, 1);
   return list;
 };
+
 //来自不同list之间拖动，1.删除原来  2不删除原来
 export const dragToList = (
   list: Array<any>,

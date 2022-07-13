@@ -25,11 +25,15 @@ type BrickWallProps = {
 
 const BrickWall = (props: BrickWallProps) => {
   const { draggable = false } = props;
+
+  const [cards, setCards] = React.useState(props.items);
+
   const MasonryCard = ({ index, data, width }: any) => {
     const CardItem = () => React.cloneElement(props.renderItem(), { ...data, index, width });
     //同列表之间拖曳
     const handleDrag = (crt: number, target: number) => {
-      dragList(props.items, crt, target);
+      const items = dragList(props.items, crt, target);
+      setCards(items);
     };
     const renderDrag = (item: any, children: any) => {
       return (
@@ -37,15 +41,15 @@ const BrickWall = (props: BrickWallProps) => {
           key={item.type}
           name={item.title}
           data={item}
-          type="xxx"
-          role="xxxAccept"
+          type="card"
+          role="card"
           onHover={() => {}}
           content={
             <Dragger
               name={item.title}
               data={item}
-              type="xxx"
-              role="xxxDrag"
+              type="card"
+              role="card"
               content={children}
               onDragFinished={(source: any, target: any) => {
                 props.onDragFinished && props.onDragFinished(source, target);
@@ -60,7 +64,7 @@ const BrickWall = (props: BrickWallProps) => {
       );
     };
 
-    return draggable ? renderDrag({ ...data, index, width }, <CardItem />) : <CardItem />;
+    return draggable ? renderDrag({ ...data, index, width }, <CardItem {...data} />) : <CardItem />;
   };
 
   const { rowGutter = 10, columnGutter = 10, columnWidth, columnCount } = props;
@@ -68,7 +72,7 @@ const BrickWall = (props: BrickWallProps) => {
   return (
     <DndProvider backend={HTML5Backend}>
       <Masonry
-        items={props.items}
+        items={cards}
         render={MasonryCard}
         columnWidth={columnWidth}
         rowGutter={rowGutter}

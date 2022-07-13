@@ -30,8 +30,8 @@ var Dragger = function Dragger(option) {
           var dropResult = monitor.getDropResult();
 
           if (item && dropResult) {
-            console.log('source:', item);
-            console.log('target:', dropResult);
+            // console.log('source:', item);
+            // console.log('target:', dropResult);
           }
 
           if (onDragFinished) {
@@ -50,7 +50,7 @@ var Dragger = function Dragger(option) {
     isDragging = _useDrag2[0].isDragging,
     drag = _useDrag2[1];
 
-  var opacity = isDragging ? 0.4 : 1;
+  var opacity = isDragging ? 0 : 1;
   return /*#__PURE__*/ _react.default.createElement(
     'div',
     {
@@ -101,14 +101,14 @@ var Acceptor = function Acceptor(option) {
 
   var isActive = canDrop && isOver;
   var backgroundColor = '#fff';
-  var border = '0px solid rgba(31, 92, 206, 0)';
+  var boxShadow = '0 0px 8px rgba(0, 0, 0, 0)';
 
   if (isActive) {
     backgroundColor = 'antiquewhite';
-    border = '1px solid #26BD11';
+    boxShadow = '0 0px 8px rgba(0, 0, 0, 0.3)';
   } else if (canDrop) {
     backgroundColor = '#fff';
-    border = '1px solid #2063AF';
+    boxShadow = '0px 0px 8px rgba(0, 0, 0, 0.2)';
   }
 
   return /*#__PURE__*/ _react.default.createElement(
@@ -122,7 +122,7 @@ var Acceptor = function Acceptor(option) {
               backgroundColor: backgroundColor,
             }
           : {
-              border: border,
+              boxShadow: boxShadow,
             },
     },
     option.content,

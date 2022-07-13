@@ -1,4 +1,5 @@
 import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
+import _slicedToArray from '@babel/runtime/helpers/esm/slicedToArray';
 import { Masonry } from 'masonic';
 import * as React from 'react';
 import { DndProvider } from 'react-dnd';
@@ -8,6 +9,11 @@ import { Acceptor, Dragger, dragList } from './drag';
 var BrickWall = function BrickWall(props) {
   var _props$draggable = props.draggable,
     draggable = _props$draggable === void 0 ? false : _props$draggable;
+
+  var _React$useState = React.useState(props.items),
+    _React$useState2 = _slicedToArray(_React$useState, 2),
+    cards = _React$useState2[0],
+    setCards = _React$useState2[1];
 
   var MasonryCard = function MasonryCard(_ref) {
     var index = _ref.index,
@@ -29,7 +35,8 @@ var BrickWall = function BrickWall(props) {
     }; //同列表之间拖曳
 
     var handleDrag = function handleDrag(crt, target) {
-      dragList(props.items, crt, target);
+      var items = dragList(props.items, crt, target);
+      setCards(items);
     };
 
     var renderDrag = function renderDrag(item, children) {
@@ -37,14 +44,14 @@ var BrickWall = function BrickWall(props) {
         key: item.type,
         name: item.title,
         data: item,
-        type: 'xxx',
-        role: 'xxxAccept',
+        type: 'card',
+        role: 'card',
         onHover: function onHover() {},
         content: /*#__PURE__*/ React.createElement(Dragger, {
           name: item.title,
           data: item,
-          type: 'xxx',
-          role: 'xxxDrag',
+          type: 'card',
+          role: 'card',
           content: children,
           onDragFinished: function onDragFinished(source, target) {
             props.onDragFinished && props.onDragFinished(source, target);
@@ -68,7 +75,7 @@ var BrickWall = function BrickWall(props) {
               width: width,
             },
           ),
-          /*#__PURE__*/ React.createElement(CardItem, null),
+          /*#__PURE__*/ React.createElement(CardItem, _objectSpread({}, data)),
         )
       : /*#__PURE__*/ React.createElement(CardItem, null);
   };
@@ -85,7 +92,7 @@ var BrickWall = function BrickWall(props) {
       backend: HTML5Backend,
     },
     /*#__PURE__*/ React.createElement(Masonry, {
-      items: props.items,
+      items: cards,
       render: MasonryCard,
       columnWidth: columnWidth,
       rowGutter: rowGutter,

@@ -1,10 +1,12 @@
 import { BrickWall } from '@bici-wui/antx';
-import React from 'react';
+import update from 'immutability-helper';
+import React, { useState } from 'react';
 
 let i = 0;
-const items = Array.from(Array(10), () => ({ id: i++, name: 'jufeng' }));
+const items = Array.from(Array(10), () => ({ id: i++, name: 'jufeng', text: 'hahah' }));
 
 const BrickWallDemo = () => {
+  const [cards, setCards] = useState(items);
   const Card = (prop: any) => (
     <div style={{ boxSizing: 'border-box', border: '1px solid #ccc' }}>
       <div>Index: {prop.index}</div>
@@ -14,11 +16,20 @@ const BrickWallDemo = () => {
     </div>
   );
   const onDragFinished = (source: any, target: any) => {
-    console.log('业务处理毁掉函数');
+    console.log('业务处理毁掉函数', source, target);
+    if (!source || !target) return;
+    setCards((prevCards: any[]) =>
+      update(prevCards, {
+        $splice: [
+          [source.data.index, 1],
+          [target.data.index, 0, prevCards[source.data.index] as any],
+        ],
+      }),
+    );
   };
   return (
     <BrickWall
-      items={items}
+      items={cards}
       draggable={true}
       columnGutter={10}
       columnWidth={210}
