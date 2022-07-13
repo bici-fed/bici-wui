@@ -1,6 +1,6 @@
 {
   "name": "@bici-wui/bus-components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "> TODO: description",
   "author": "jufeng <jufeng@bici-wui.cn>",
   "homepage": "",
@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
-    "@bici-wui/antx": "^1.0.1",
-    "@bici-wui/utils": "^1.0.1",
+    "@bici-wui/antx": "^1.0.2",
+    "@bici-wui/utils": "^1.0.2",
     "omit": "^1.0.1"
   },
   "repository": {
