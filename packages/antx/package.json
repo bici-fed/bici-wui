@@ -1,6 +1,6 @@
 {
   "name": "@bici-wui/antx",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "基于antd封装的增强组件以及其他的一些公共组件，纯UI组件",
   "keywords": [
     "antd"
