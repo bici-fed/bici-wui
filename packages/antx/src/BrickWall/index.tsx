@@ -1,4 +1,5 @@
-import { Masonry } from 'masonic';
+import { useMasonry, usePositioner, useResizeObserver } from 'masonic';
+import { useScroller, useSize } from 'mini-virtual-list';
 import * as React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -25,6 +26,18 @@ type BrickWallProps = {
 
 const BrickWall = (props: BrickWallProps) => {
   const { draggable = false } = props;
+
+  const containerRef = React.useRef(null);
+  const { width, height } = useSize(containerRef);
+
+  const { scrollTop, isScrolling } = useScroller(containerRef);
+  const positioner = usePositioner({
+    width,
+    columnWidth: 172,
+    columnGutter: 8,
+  });
+
+  const resizeObserver = useResizeObserver(positioner);
 
   const [cards, setCards] = React.useState(props.items);
 
@@ -69,16 +82,51 @@ const BrickWall = (props: BrickWallProps) => {
 
   const { rowGutter = 10, columnGutter = 10, columnWidth, columnCount } = props;
 
+  // useEffect(()=>{
+  //   setTimeout(()=>{
+  //     console.log(123)
+  //     // @ts-ignore
+  //     containerRef.current.style.width=200+"px";
+  //     const myEvent = new Event('resize');
+  //     window.dispatchEvent(myEvent);
+  //   },10000)
+  //
+  // },[])
+
   return (
     <DndProvider backend={HTML5Backend}>
-      <Masonry
-        items={cards}
-        render={MasonryCard}
-        columnWidth={columnWidth}
-        rowGutter={rowGutter}
-        columnGutter={columnGutter}
-        columnCount={columnCount}
-      />
+      <div ref={containerRef}>
+        {/*<Masonry*/}
+        {/*  resizeObserver={resizeObserver}*/}
+        {/*  items={cards}*/}
+        {/*  render={MasonryCard}*/}
+        {/*  columnWidth={columnWidth}*/}
+        {/*  rowGutter={rowGutter}*/}
+        {/*  columnGutter={columnGutter}*/}
+        {/*  columnCount={columnCount}*/}
+        {/*/>*/}
+        {/*{useMasonry({*/}
+        {/*  positioner,*/}
+        {/*  resizeObserver,*/}
+        {/*  cards,*/}
+        {/*  height,*/}
+        {/*  scrollTop,*/}
+        {/*  isScrolling,*/}
+        {/*  overscanBy: 6,*/}
+        {/*  render: MasonryCard*/}
+        {/*})}*/}
+        {useMasonry({
+          positioner,
+          resizeObserver,
+          scrollTop,
+          isScrolling,
+          height,
+          containerRef,
+          items: cards,
+          overscanBy: 1,
+          render: MasonryCard,
+        })}
+      </div>
     </DndProvider>
   );
 };

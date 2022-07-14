@@ -1,6 +1,7 @@
 import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
 import _slicedToArray from '@babel/runtime/helpers/esm/slicedToArray';
-import { Masonry } from 'masonic';
+import { useMasonry, usePositioner, useResizeObserver } from 'masonic';
+import { useScroller, useSize } from 'mini-virtual-list';
 import * as React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -9,6 +10,22 @@ import { Acceptor, Dragger, dragList } from './drag';
 var BrickWall = function BrickWall(props) {
   var _props$draggable = props.draggable,
     draggable = _props$draggable === void 0 ? false : _props$draggable;
+  var containerRef = React.useRef(null);
+
+  var _useSize = useSize(containerRef),
+    width = _useSize.width,
+    height = _useSize.height;
+
+  var _useScroller = useScroller(containerRef),
+    scrollTop = _useScroller.scrollTop,
+    isScrolling = _useScroller.isScrolling;
+
+  var positioner = usePositioner({
+    width: width,
+    columnWidth: 172,
+    columnGutter: 8,
+  });
+  var resizeObserver = useResizeObserver(positioner);
 
   var _React$useState = React.useState(props.items),
     _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -85,20 +102,39 @@ var BrickWall = function BrickWall(props) {
     _props$columnGutter = props.columnGutter,
     columnGutter = _props$columnGutter === void 0 ? 10 : _props$columnGutter,
     columnWidth = props.columnWidth,
-    columnCount = props.columnCount;
+    columnCount = props.columnCount; // useEffect(()=>{
+  //   setTimeout(()=>{
+  //     console.log(123)
+  //     // @ts-ignore
+  //     containerRef.current.style.width=200+"px";
+  //     const myEvent = new Event('resize');
+  //     window.dispatchEvent(myEvent);
+  //   },10000)
+  //
+  // },[])
+
   return /*#__PURE__*/ React.createElement(
     DndProvider,
     {
       backend: HTML5Backend,
     },
-    /*#__PURE__*/ React.createElement(Masonry, {
-      items: cards,
-      render: MasonryCard,
-      columnWidth: columnWidth,
-      rowGutter: rowGutter,
-      columnGutter: columnGutter,
-      columnCount: columnCount,
-    }),
+    /*#__PURE__*/ React.createElement(
+      'div',
+      {
+        ref: containerRef,
+      },
+      useMasonry({
+        positioner: positioner,
+        resizeObserver: resizeObserver,
+        scrollTop: scrollTop,
+        isScrolling: isScrolling,
+        height: height,
+        containerRef: containerRef,
+        items: cards,
+        overscanBy: 1,
+        render: MasonryCard,
+      }),
+    ),
   );
 };
 

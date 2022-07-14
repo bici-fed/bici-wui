@@ -21,11 +21,29 @@ var _reactDnd = require('react-dnd');
 
 var _reactDndHtml5Backend = require('react-dnd-html5-backend');
 
+var _miniVirtualList = require('mini-virtual-list');
+
 var _drag = require('./drag');
 
 var BrickWall = function BrickWall(props) {
   var _props$draggable = props.draggable,
     draggable = _props$draggable === void 0 ? false : _props$draggable;
+  var containerRef = React.useRef(null);
+
+  var _useSize = (0, _miniVirtualList.useSize)(containerRef),
+    width = _useSize.width,
+    height = _useSize.height;
+
+  var _useScroller = (0, _miniVirtualList.useScroller)(containerRef),
+    scrollTop = _useScroller.scrollTop,
+    isScrolling = _useScroller.isScrolling;
+
+  var positioner = (0, _masonic.usePositioner)({
+    width: width,
+    columnWidth: 172,
+    columnGutter: 8,
+  });
+  var resizeObserver = (0, _masonic.useResizeObserver)(positioner);
 
   var _React$useState = React.useState(props.items),
     _React$useState2 = (0, _slicedToArray2.default)(_React$useState, 2),
@@ -102,20 +120,39 @@ var BrickWall = function BrickWall(props) {
     _props$columnGutter = props.columnGutter,
     columnGutter = _props$columnGutter === void 0 ? 10 : _props$columnGutter,
     columnWidth = props.columnWidth,
-    columnCount = props.columnCount;
+    columnCount = props.columnCount; // useEffect(()=>{
+  //   setTimeout(()=>{
+  //     console.log(123)
+  //     // @ts-ignore
+  //     containerRef.current.style.width=200+"px";
+  //     const myEvent = new Event('resize');
+  //     window.dispatchEvent(myEvent);
+  //   },10000)
+  //
+  // },[])
+
   return /*#__PURE__*/ React.createElement(
     _reactDnd.DndProvider,
     {
       backend: _reactDndHtml5Backend.HTML5Backend,
     },
-    /*#__PURE__*/ React.createElement(_masonic.Masonry, {
-      items: cards,
-      render: MasonryCard,
-      columnWidth: columnWidth,
-      rowGutter: rowGutter,
-      columnGutter: columnGutter,
-      columnCount: columnCount,
-    }),
+    /*#__PURE__*/ React.createElement(
+      'div',
+      {
+        ref: containerRef,
+      },
+      (0, _masonic.useMasonry)({
+        positioner: positioner,
+        resizeObserver: resizeObserver,
+        scrollTop: scrollTop,
+        isScrolling: isScrolling,
+        height: height,
+        containerRef: containerRef,
+        items: cards,
+        overscanBy: 1,
+        render: MasonryCard,
+      }),
+    ),
   );
 };
 

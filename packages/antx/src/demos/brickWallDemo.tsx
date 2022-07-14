@@ -3,7 +3,7 @@ import update from 'immutability-helper';
 import React, { useState } from 'react';
 
 let i = 0;
-const items = Array.from(Array(10), () => ({ id: i++, name: 'jufeng', text: 'hahah' }));
+const items = Array.from(Array(30), () => ({ id: i++, name: 'jufeng', text: 'hahah' }));
 
 const BrickWallDemo = () => {
   const [cards, setCards] = useState(items);
