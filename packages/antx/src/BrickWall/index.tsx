@@ -25,16 +25,19 @@ type BrickWallProps = {
 };
 
 const BrickWall = (props: BrickWallProps) => {
-  const { draggable = false } = props;
+  const { rowGutter = 10, columnGutter = 10, columnWidth, columnCount, draggable = false } = props;
 
   const containerRef = React.useRef(null);
   const { width, height } = useSize(containerRef);
 
   const { scrollTop, isScrolling } = useScroller(containerRef);
+
   const positioner = usePositioner({
     width,
-    columnWidth: 172,
-    columnGutter: 8,
+    columnWidth,
+    columnGutter,
+    rowGutter,
+    columnCount,
   });
 
   const resizeObserver = useResizeObserver(positioner);
@@ -80,41 +83,9 @@ const BrickWall = (props: BrickWallProps) => {
     return draggable ? renderDrag({ ...data, index, width }, <CardItem {...data} />) : <CardItem />;
   };
 
-  const { rowGutter = 10, columnGutter = 10, columnWidth, columnCount } = props;
-
-  // useEffect(()=>{
-  //   setTimeout(()=>{
-  //     console.log(123)
-  //     // @ts-ignore
-  //     containerRef.current.style.width=200+"px";
-  //     const myEvent = new Event('resize');
-  //     window.dispatchEvent(myEvent);
-  //   },10000)
-  //
-  // },[])
-
   return (
     <DndProvider backend={HTML5Backend}>
       <div ref={containerRef}>
-        {/*<Masonry*/}
-        {/*  resizeObserver={resizeObserver}*/}
-        {/*  items={cards}*/}
-        {/*  render={MasonryCard}*/}
-        {/*  columnWidth={columnWidth}*/}
-        {/*  rowGutter={rowGutter}*/}
-        {/*  columnGutter={columnGutter}*/}
-        {/*  columnCount={columnCount}*/}
-        {/*/>*/}
-        {/*{useMasonry({*/}
-        {/*  positioner,*/}
-        {/*  resizeObserver,*/}
-        {/*  cards,*/}
-        {/*  height,*/}
-        {/*  scrollTop,*/}
-        {/*  isScrolling,*/}
-        {/*  overscanBy: 6,*/}
-        {/*  render: MasonryCard*/}
-        {/*})}*/}
         {useMasonry({
           positioner,
           resizeObserver,

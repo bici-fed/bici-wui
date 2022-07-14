@@ -15,13 +15,13 @@ var _slicedToArray2 = _interopRequireDefault(require('@babel/runtime/helpers/sli
 
 var _masonic = require('masonic');
 
+var _miniVirtualList = require('mini-virtual-list');
+
 var React = _interopRequireWildcard(require('react'));
 
 var _reactDnd = require('react-dnd');
 
 var _reactDndHtml5Backend = require('react-dnd-html5-backend');
-
-var _miniVirtualList = require('mini-virtual-list');
 
 var _drag = require('./drag');
 
