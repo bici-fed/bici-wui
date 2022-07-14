@@ -2,9 +2,9 @@ import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { AcceptorProps, DragProps } from './typing';
 
-export const Dragger = function Dragger(option: DragProps) {
+export const Dragger = (option: DragProps) => {
   const { name, data, type, onDragFinished } = option;
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [{ isDragging }, drag, preview] = useDrag(() => ({
     type: type,
     item: { name: name, data: data },
     end: (item, monitor, ...arg) => {
@@ -23,9 +23,12 @@ export const Dragger = function Dragger(option: DragProps) {
     }),
   }));
   const opacity = isDragging ? 0 : 1;
+
+  const r = React.cloneElement(option.content, { dragRef: drag });
+
   return (
-    <div ref={drag} role={option.role} style={{ opacity }} data-id={`${option.name}`}>
-      {option.content}
+    <div ref={preview} role={option.role} style={{ opacity }} data-id={`${option.name}`}>
+      {r}
     </div>
   );
 };

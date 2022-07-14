@@ -26,7 +26,6 @@ type BrickWallProps = {
 
 const BrickWall = (props: BrickWallProps) => {
   const { rowGutter = 10, columnGutter = 10, columnWidth, columnCount, draggable = false } = props;
-
   const containerRef = React.useRef(null);
   const { width, height } = useSize(containerRef);
 
@@ -45,7 +44,8 @@ const BrickWall = (props: BrickWallProps) => {
   const [cards, setCards] = React.useState(props.items);
 
   const MasonryCard = ({ index, data, width }: any) => {
-    const CardItem = () => React.cloneElement(props.renderItem(), { ...data, index, width });
+    const CardItem = ({ ...prop }) =>
+      React.cloneElement(props.renderItem(), { ...data, index, width, ...prop });
     //同列表之间拖曳
     const handleDrag = (crt: number, target: number) => {
       const items = dragList(props.items, crt, target);
@@ -55,14 +55,14 @@ const BrickWall = (props: BrickWallProps) => {
       return (
         <Acceptor
           key={item.type}
-          name={item.title}
+          name={item.id}
           data={item}
           type="card"
           role="card"
           onHover={() => {}}
           content={
             <Dragger
-              name={item.title}
+              name={item.id}
               data={item}
               type="card"
               role="card"

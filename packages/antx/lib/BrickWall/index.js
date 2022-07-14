@@ -26,7 +26,13 @@ var _reactDndHtml5Backend = require('react-dnd-html5-backend');
 var _drag = require('./drag');
 
 var BrickWall = function BrickWall(props) {
-  var _props$draggable = props.draggable,
+  var _props$rowGutter = props.rowGutter,
+    rowGutter = _props$rowGutter === void 0 ? 10 : _props$rowGutter,
+    _props$columnGutter = props.columnGutter,
+    columnGutter = _props$columnGutter === void 0 ? 10 : _props$columnGutter,
+    columnWidth = props.columnWidth,
+    columnCount = props.columnCount,
+    _props$draggable = props.draggable,
     draggable = _props$draggable === void 0 ? false : _props$draggable;
   var containerRef = React.useRef(null);
 
@@ -40,8 +46,10 @@ var BrickWall = function BrickWall(props) {
 
   var positioner = (0, _masonic.usePositioner)({
     width: width,
-    columnWidth: 172,
-    columnGutter: 8,
+    columnWidth: columnWidth,
+    columnGutter: columnGutter,
+    rowGutter: rowGutter,
+    columnCount: columnCount,
   });
   var resizeObserver = (0, _masonic.useResizeObserver)(positioner);
 
@@ -114,22 +122,6 @@ var BrickWall = function BrickWall(props) {
         )
       : /*#__PURE__*/ React.createElement(CardItem, null);
   };
-
-  var _props$rowGutter = props.rowGutter,
-    rowGutter = _props$rowGutter === void 0 ? 10 : _props$rowGutter,
-    _props$columnGutter = props.columnGutter,
-    columnGutter = _props$columnGutter === void 0 ? 10 : _props$columnGutter,
-    columnWidth = props.columnWidth,
-    columnCount = props.columnCount; // useEffect(()=>{
-  //   setTimeout(()=>{
-  //     console.log(123)
-  //     // @ts-ignore
-  //     containerRef.current.style.width=200+"px";
-  //     const myEvent = new Event('resize');
-  //     window.dispatchEvent(myEvent);
-  //   },10000)
-  //
-  // },[])
 
   return /*#__PURE__*/ React.createElement(
     _reactDnd.DndProvider,
