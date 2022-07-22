@@ -46,22 +46,28 @@ var Dragger = function Dragger(option) {
         },
       };
     }),
-    _useDrag2 = (0, _slicedToArray2.default)(_useDrag, 2),
+    _useDrag2 = (0, _slicedToArray2.default)(_useDrag, 3),
     isDragging = _useDrag2[0].isDragging,
-    drag = _useDrag2[1];
+    drag = _useDrag2[1],
+    preview = _useDrag2[2];
 
   var opacity = isDragging ? 0 : 1;
+
+  var r = /*#__PURE__*/ _react.default.cloneElement(option.content, {
+    dragRef: drag,
+  });
+
   return /*#__PURE__*/ _react.default.createElement(
     'div',
     {
-      ref: drag,
+      ref: preview,
       role: option.role,
       style: {
         opacity: opacity,
       },
       'data-id': ''.concat(option.name),
     },
-    option.content,
+    r,
   );
 };
 

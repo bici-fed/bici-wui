@@ -10,8 +10,12 @@ declare class Modal extends React.Component<WuiModalProps<ModalProps>> {
       bottom: number;
       right: number;
     };
+    disabled: boolean;
   };
+  id: string;
+  componentDidMount(): void;
   draggleRef: any;
+  titleRef: any;
   onStart: (event: any, uiData: any) => void;
   render(): JSX.Element;
 }

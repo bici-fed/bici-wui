@@ -1,22 +1,52 @@
-import React from 'react';
-import { Modal as ANTModal, Button } from 'antd';
 import type { ModalProps } from 'antd';
-import Draggable from 'react-draggable';
+import { Modal as ANTModal } from 'antd';
 import _ from 'lodash';
+import React from 'react';
+import Draggable from 'react-draggable';
+import { s8 } from '../utils/uuid';
 import { WuiModalProps } from './typing';
 
 export type { WuiModalProps };
 
+function parentUntil(ele: any, eleId: string) {
+  let parent = undefined;
+  do {
+    const pd = ele.parentNode || ele.parentElement;
+    if (document.getElementById(eleId) == pd) {
+      parent = pd;
+    }
+  } while (!parent);
+  return parent;
+}
+
 class Modal extends React.Component<WuiModalProps<ModalProps>> {
   state = {
     bounds: { left: 0, top: 0, bottom: 0, right: 0 },
+    disabled: false,
   };
 
+  id = s8();
+
+  componentDidMount() {
+    this.setState({ disabled: this.props.draggable });
+  }
+
   draggleRef = React.createRef() as any;
+  titleRef = React.createRef() as any;
 
   onStart = (event: any, uiData: any) => {
+    let parentDom = event.target;
+    if (document.getElementById(this.id) !== parentDom) {
+      parentDom = parentUntil(parentDom, this.id);
+    }
+    if (this.titleRef.current != parentDom) {
+      return;
+    }
     const { clientWidth, clientHeight } = window.document.documentElement;
     const targetRect = (this.draggleRef.current as any)?.getBoundingClientRect();
+    if (parentDom.dataset.drag !== 'yes') {
+      return;
+    }
     if (!targetRect) {
       return;
     }
@@ -39,16 +69,29 @@ class Modal extends React.Component<WuiModalProps<ModalProps>> {
         <ANTModal
           title={
             <div
+              ref={this.titleRef}
               style={{
                 width: '100%',
                 cursor: draggable ? 'move' : 'default',
               }}
-              onMouseOver={() => {}}
-              onMouseOut={() => {}}
+              id={this.id}
+              data-drag="yes"
+              onMouseOver={() => {
+                if (this.props.draggable) {
+                  this.setState({ disabled: true });
+                }
+              }}
+              onMouseOut={() => {
+                this.setState({ disabled: false });
+              }}
+              onMouseDown={(e) => {
+                e.cancelable = true;
+              }}
               // fix eslintjsx-a11y/mouse-events-have-key-events
               // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
               onFocus={() => {}}
               onBlur={() => {}}
+
               // end
             >
               {this.props.title}
@@ -57,9 +100,11 @@ class Modal extends React.Component<WuiModalProps<ModalProps>> {
           {...restProps}
           modalRender={(modal) => (
             <Draggable
-              disabled={!draggable}
+              disabled={!this.state.disabled}
               bounds={bounds}
-              onStart={(event, uiData) => this.onStart(event, uiData)}
+              onStart={(event, uiData) => {
+                this.onStart(event, uiData);
+              }}
             >
               <div ref={this.draggleRef}>{modal}</div>
             </Draggable>

@@ -34,22 +34,26 @@ export var Dragger = function Dragger(option) {
         },
       };
     }),
-    _useDrag2 = _slicedToArray(_useDrag, 2),
+    _useDrag2 = _slicedToArray(_useDrag, 3),
     isDragging = _useDrag2[0].isDragging,
-    drag = _useDrag2[1];
+    drag = _useDrag2[1],
+    preview = _useDrag2[2];
 
   var opacity = isDragging ? 0 : 1;
+  var r = /*#__PURE__*/ React.cloneElement(option.content, {
+    dragRef: drag,
+  });
   return /*#__PURE__*/ React.createElement(
     'div',
     {
-      ref: drag,
+      ref: preview,
       role: option.role,
       style: {
         opacity: opacity,
       },
       'data-id': ''.concat(option.name),
     },
-    option.content,
+    r,
   );
 };
 export var Acceptor = function Acceptor(option) {

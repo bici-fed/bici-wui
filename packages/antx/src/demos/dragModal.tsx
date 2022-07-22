@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import { Modal } from '@bici-wui/antx';
 import { Button } from 'antd';
+import React, { useState } from 'react';
 
 /**
  * title: 我是标题
@@ -30,7 +30,7 @@ const ModalDemo = () => {
       <Modal
         draggable={true}
         width={1000}
-        title={<div style={{ color: 'red' }}>基本使用modal</div>}
+        title={<div>基本使用modal</div>}
         onCancel={handleCancel}
         onOk={handleOk}
         visible={visible}

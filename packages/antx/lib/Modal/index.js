@@ -27,6 +27,22 @@ var _reactDraggable = _interopRequireDefault(require('react-draggable'));
 
 var _lodash = _interopRequireDefault(require('lodash'));
 
+var _uuid = require('../utils/uuid');
+
+function parentUntil(ele, eleId) {
+  var parent = undefined;
+
+  do {
+    var pd = ele.parentNode || ele.parentElement;
+
+    if (document.getElementById(eleId) == pd) {
+      parent = pd;
+    }
+  } while (!parent);
+
+  return parent;
+}
+
 var Modal = /*#__PURE__*/ (function (_React$Component) {
   (0, _inherits2.default)(Modal, _React$Component);
 
@@ -49,11 +65,24 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
         bottom: 0,
         right: 0,
       },
+      disabled: false,
     };
+    _this.id = (0, _uuid.s8)();
     _this.draggleRef = /*#__PURE__*/ _react.default.createRef();
+    _this.titleRef = /*#__PURE__*/ _react.default.createRef();
 
     _this.onStart = function (event, uiData) {
       var _this$draggleRef$curr;
+
+      var parentDom = event.target;
+
+      if (document.getElementById(_this.id) !== parentDom) {
+        parentDom = parentUntil(parentDom, _this.id);
+      }
+
+      if (_this.titleRef.current != parentDom) {
+        return;
+      }
 
       var _window$document$docu = window.document.documentElement,
         clientWidth = _window$document$docu.clientWidth,
@@ -63,6 +92,10 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
         _this$draggleRef$curr === void 0
           ? void 0
           : _this$draggleRef$curr.getBoundingClientRect();
+
+      if (parentDom.dataset.drag !== 'yes') {
+        return;
+      }
 
       if (!targetRect) {
         return;
@@ -82,6 +115,14 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
   }
 
   (0, _createClass2.default)(Modal, [
+    {
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        this.setState({
+          disabled: this.props.draggable,
+        });
+      },
+    },
     {
       key: 'render',
       value: function render() {
@@ -103,12 +144,28 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
                   title: /*#__PURE__*/ _react.default.createElement(
                     'div',
                     {
+                      ref: this.titleRef,
                       style: {
                         width: '100%',
                         cursor: draggable ? 'move' : 'default',
                       },
-                      onMouseOver: function onMouseOver() {},
-                      onMouseOut: function onMouseOut() {},
+                      id: this.id,
+                      'data-drag': 'yes',
+                      onMouseOver: function onMouseOver() {
+                        if (_this2.props.draggable) {
+                          _this2.setState({
+                            disabled: true,
+                          });
+                        }
+                      },
+                      onMouseOut: function onMouseOut() {
+                        _this2.setState({
+                          disabled: false,
+                        });
+                      },
+                      onMouseDown: function onMouseDown(e) {
+                        e.cancelable = true;
+                      },
                       // fix eslintjsx-a11y/mouse-events-have-key-events
                       // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
                       onFocus: function onFocus() {},
@@ -125,10 +182,10 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
                   return /*#__PURE__*/ _react.default.createElement(
                     _reactDraggable.default,
                     {
-                      disabled: !draggable,
+                      disabled: !_this2.state.disabled,
                       bounds: bounds,
                       onStart: function onStart(event, uiData) {
-                        return _this2.onStart(event, uiData);
+                        _this2.onStart(event, uiData);
                       },
                     },
                     /*#__PURE__*/ _react.default.createElement(

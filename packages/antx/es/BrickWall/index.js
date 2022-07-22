@@ -1,3 +1,4 @@
+import _extends from '@babel/runtime/helpers/esm/extends';
 import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
 import _slicedToArray from '@babel/runtime/helpers/esm/slicedToArray';
 import { useMasonry, usePositioner, useResizeObserver } from 'masonic';
@@ -45,7 +46,9 @@ var BrickWall = function BrickWall(props) {
       data = _ref.data,
       width = _ref.width;
 
-    var CardItem = function CardItem() {
+    var CardItem = function CardItem(_ref2) {
+      var prop = _extends({}, _ref2);
+
       return /*#__PURE__*/ React.cloneElement(
         props.renderItem(),
         _objectSpread(
@@ -55,6 +58,7 @@ var BrickWall = function BrickWall(props) {
             index: index,
             width: width,
           },
+          prop,
         ),
       );
     }; //同列表之间拖曳
@@ -67,13 +71,13 @@ var BrickWall = function BrickWall(props) {
     var renderDrag = function renderDrag(item, children) {
       return /*#__PURE__*/ React.createElement(Acceptor, {
         key: item.type,
-        name: item.title,
+        name: item.id,
         data: item,
         type: 'card',
         role: 'card',
         onHover: function onHover() {},
         content: /*#__PURE__*/ React.createElement(Dragger, {
-          name: item.title,
+          name: item.id,
           data: item,
           type: 'card',
           role: 'card',

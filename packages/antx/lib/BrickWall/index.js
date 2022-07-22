@@ -11,6 +11,8 @@ exports.default = void 0;
 
 var _objectSpread2 = _interopRequireDefault(require('@babel/runtime/helpers/objectSpread2'));
 
+var _extends2 = _interopRequireDefault(require('@babel/runtime/helpers/extends'));
+
 var _slicedToArray2 = _interopRequireDefault(require('@babel/runtime/helpers/slicedToArray'));
 
 var _masonic = require('masonic');
@@ -63,7 +65,8 @@ var BrickWall = function BrickWall(props) {
       data = _ref.data,
       width = _ref.width;
 
-    var CardItem = function CardItem() {
+    var CardItem = function CardItem(_ref2) {
+      var prop = (0, _extends2.default)({}, _ref2);
       return /*#__PURE__*/ React.cloneElement(
         props.renderItem(),
         (0, _objectSpread2.default)(
@@ -73,6 +76,7 @@ var BrickWall = function BrickWall(props) {
             index: index,
             width: width,
           },
+          prop,
         ),
       );
     }; //同列表之间拖曳
@@ -85,13 +89,13 @@ var BrickWall = function BrickWall(props) {
     var renderDrag = function renderDrag(item, children) {
       return /*#__PURE__*/ React.createElement(_drag.Acceptor, {
         key: item.type,
-        name: item.title,
+        name: item.id,
         data: item,
         type: 'card',
         role: 'card',
         onHover: function onHover() {},
         content: /*#__PURE__*/ React.createElement(_drag.Dragger, {
-          name: item.title,
+          name: item.id,
           data: item,
           type: 'card',
           role: 'card',
