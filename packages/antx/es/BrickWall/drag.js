@@ -1,4 +1,5 @@
 import _slicedToArray from '@babel/runtime/helpers/esm/slicedToArray';
+import { jsx as _jsx } from 'react/jsx-runtime';
 import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 export var Dragger = function Dragger(option) {
@@ -43,18 +44,15 @@ export var Dragger = function Dragger(option) {
   var r = /*#__PURE__*/ React.cloneElement(option.content, {
     dragRef: drag,
   });
-  return /*#__PURE__*/ React.createElement(
-    'div',
-    {
-      ref: preview,
-      role: option.role,
-      style: {
-        opacity: opacity,
-      },
-      'data-id': ''.concat(option.name),
+  return _jsx('div', {
+    ref: preview,
+    role: option.role,
+    style: {
+      opacity: opacity,
     },
-    r,
-  );
+    'data-id': ''.concat(option.name),
+    children: r,
+  });
 };
 export var Acceptor = function Acceptor(option) {
   var name = option.name,
@@ -100,22 +98,19 @@ export var Acceptor = function Acceptor(option) {
     boxShadow = '0px 0px 8px rgba(0, 0, 0, 0.2)';
   }
 
-  return /*#__PURE__*/ React.createElement(
-    'div',
-    {
-      ref: drop,
-      role: 'Acceptor',
-      style:
-        styleType === 'background'
-          ? {
-              backgroundColor: backgroundColor,
-            }
-          : {
-              boxShadow: boxShadow,
-            },
-    },
-    option.content,
-  );
+  return _jsx('div', {
+    ref: drop,
+    role: 'Acceptor',
+    style:
+      styleType === 'background'
+        ? {
+            backgroundColor: backgroundColor,
+          }
+        : {
+            boxShadow: boxShadow,
+          },
+    children: option.content,
+  });
 }; //同一list之间拖动
 
 export var dragList = function dragList(list, crtIndex, willIndex) {

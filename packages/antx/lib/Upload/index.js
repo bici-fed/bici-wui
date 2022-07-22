@@ -1,7 +1,5 @@
 'use strict';
 
-var _interopRequireWildcard = require('@babel/runtime/helpers/interopRequireWildcard').default;
-
 var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault').default;
 
 Object.defineProperty(exports, '__esModule', {
@@ -23,7 +21,9 @@ var _objectSpread2 = _interopRequireDefault(require('@babel/runtime/helpers/obje
 
 var _slicedToArray2 = _interopRequireDefault(require('@babel/runtime/helpers/slicedToArray'));
 
-var _react = _interopRequireWildcard(require('react'));
+var _jsxRuntime = require('react/jsx-runtime');
+
+var _react = require('react');
 
 var _util = require('./util');
 
@@ -302,10 +302,15 @@ var BiciUpload = function BiciUpload(props) {
       showRemoveIcon: true,
     },
   };
-  return /*#__PURE__*/ _react.default.createElement(
+  return (0, _jsxRuntime.jsx)(
     _upload.default,
-    (0, _objectSpread2.default)({}, uploadProps),
-    props.children,
+    (0, _objectSpread2.default)(
+      (0, _objectSpread2.default)({}, uploadProps),
+      {},
+      {
+        children: props.children,
+      },
+    ),
   );
 };
 

@@ -1,6 +1,8 @@
-export { default as BrickWall } from './BrickWall';
-export { default as Empty } from './Empty';
-export { default as Modal } from './Modal';
-export { default as Notification } from './Notification';
-export * from './Upload';
-export { default as Upload } from './Upload';
+import BrickWall from './BrickWall';
+import Empty from './Empty';
+import Modal from './Modal';
+import Notification from './Notification';
+import Upload from './Upload';
+import type { WuiUploadProps } from './Upload/typing';
+export { BrickWall, Empty, Modal, Notification, Upload };
+export type { WuiUploadProps };

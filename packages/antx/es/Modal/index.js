@@ -1,10 +1,11 @@
+import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
+import 'antd/es/modal/style';
+import _Modal from 'antd/es/modal';
 import _classCallCheck from '@babel/runtime/helpers/esm/classCallCheck';
 import _createClass from '@babel/runtime/helpers/esm/createClass';
-import _createSuper from '@babel/runtime/helpers/esm/createSuper';
 import _inherits from '@babel/runtime/helpers/esm/inherits';
-import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
-import _Modal from 'antd/es/modal';
-import 'antd/es/modal/style';
+import _createSuper from '@babel/runtime/helpers/esm/createSuper';
+import { jsx as _jsx, Fragment as _Fragment } from 'react/jsx-runtime';
 import _ from 'lodash';
 import React from 'react';
 import Draggable from 'react-draggable';
@@ -114,75 +115,64 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
         var restProps = _.omit(this.props, ['modalRender', 'title']);
 
         var draggable = this.props.draggable;
-        return /*#__PURE__*/ React.createElement(
-          React.Fragment,
-          null,
-          /*#__PURE__*/ React.createElement(
+        return _jsx(_Fragment, {
+          children: _jsx(
             _Modal,
             _objectSpread(
               _objectSpread(
                 {
-                  title: /*#__PURE__*/ React.createElement(
-                    'div',
-                    {
-                      ref: this.titleRef,
-                      style: {
-                        width: '100%',
-                        cursor: draggable ? 'move' : 'default',
-                      },
-                      id: this.id,
-                      'data-drag': 'yes',
-                      onMouseOver: function onMouseOver() {
-                        if (_this2.props.draggable) {
-                          _this2.setState({
-                            disabled: true,
-                          });
-                        }
-                      },
-                      onMouseOut: function onMouseOut() {
-                        _this2.setState({
-                          disabled: false,
-                        });
-                      },
-                      onMouseDown: function onMouseDown(e) {
-                        e.cancelable = true;
-                      },
-                      // fix eslintjsx-a11y/mouse-events-have-key-events
-                      // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
-                      onFocus: function onFocus() {},
-                      onBlur: function onBlur() {},
+                  title: _jsx('div', {
+                    ref: this.titleRef,
+                    style: {
+                      width: '100%',
+                      cursor: draggable ? 'move' : 'default',
                     },
-                    this.props.title,
-                  ),
+                    id: this.id,
+                    'data-drag': 'yes',
+                    onMouseOver: function onMouseOver() {
+                      if (_this2.props.draggable) {
+                        _this2.setState({
+                          disabled: true,
+                        });
+                      }
+                    },
+                    onMouseOut: function onMouseOut() {
+                      _this2.setState({
+                        disabled: false,
+                      });
+                    },
+                    onMouseDown: function onMouseDown(e) {
+                      e.cancelable = true;
+                    },
+                    // fix eslintjsx-a11y/mouse-events-have-key-events
+                    // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
+                    onFocus: function onFocus() {},
+                    onBlur: function onBlur() {},
+                    children: this.props.title,
+                  }),
                 },
                 restProps,
               ),
               {},
               {
                 modalRender: function modalRender(modal) {
-                  return /*#__PURE__*/ React.createElement(
-                    Draggable,
-                    {
-                      disabled: !_this2.state.disabled,
-                      bounds: bounds,
-                      onStart: function onStart(event, uiData) {
-                        _this2.onStart(event, uiData);
-                      },
+                  return _jsx(Draggable, {
+                    disabled: !_this2.state.disabled,
+                    bounds: bounds,
+                    onStart: function onStart(event, uiData) {
+                      _this2.onStart(event, uiData);
                     },
-                    /*#__PURE__*/ React.createElement(
-                      'div',
-                      {
-                        ref: _this2.draggleRef,
-                      },
-                      modal,
-                    ),
-                  );
+                    children: _jsx('div', {
+                      ref: _this2.draggleRef,
+                      children: modal,
+                    }),
+                  });
                 },
+                children: this.props.children,
               },
             ),
-            this.props.children,
           ),
-        );
+        });
       },
     },
   ]);

@@ -21,11 +21,13 @@ var _inherits2 = _interopRequireDefault(require('@babel/runtime/helpers/inherits
 
 var _createSuper2 = _interopRequireDefault(require('@babel/runtime/helpers/createSuper'));
 
+var _jsxRuntime = require('react/jsx-runtime');
+
+var _lodash = _interopRequireDefault(require('lodash'));
+
 var _react = _interopRequireDefault(require('react'));
 
 var _reactDraggable = _interopRequireDefault(require('react-draggable'));
-
-var _lodash = _interopRequireDefault(require('lodash'));
 
 var _uuid = require('../utils/uuid');
 
@@ -133,75 +135,64 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
         var restProps = _lodash.default.omit(this.props, ['modalRender', 'title']);
 
         var draggable = this.props.draggable;
-        return /*#__PURE__*/ _react.default.createElement(
-          _react.default.Fragment,
-          null,
-          /*#__PURE__*/ _react.default.createElement(
+        return (0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
+          children: (0, _jsxRuntime.jsx)(
             _modal.default,
             (0, _objectSpread2.default)(
               (0, _objectSpread2.default)(
                 {
-                  title: /*#__PURE__*/ _react.default.createElement(
-                    'div',
-                    {
-                      ref: this.titleRef,
-                      style: {
-                        width: '100%',
-                        cursor: draggable ? 'move' : 'default',
-                      },
-                      id: this.id,
-                      'data-drag': 'yes',
-                      onMouseOver: function onMouseOver() {
-                        if (_this2.props.draggable) {
-                          _this2.setState({
-                            disabled: true,
-                          });
-                        }
-                      },
-                      onMouseOut: function onMouseOut() {
-                        _this2.setState({
-                          disabled: false,
-                        });
-                      },
-                      onMouseDown: function onMouseDown(e) {
-                        e.cancelable = true;
-                      },
-                      // fix eslintjsx-a11y/mouse-events-have-key-events
-                      // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
-                      onFocus: function onFocus() {},
-                      onBlur: function onBlur() {},
+                  title: (0, _jsxRuntime.jsx)('div', {
+                    ref: this.titleRef,
+                    style: {
+                      width: '100%',
+                      cursor: draggable ? 'move' : 'default',
                     },
-                    this.props.title,
-                  ),
+                    id: this.id,
+                    'data-drag': 'yes',
+                    onMouseOver: function onMouseOver() {
+                      if (_this2.props.draggable) {
+                        _this2.setState({
+                          disabled: true,
+                        });
+                      }
+                    },
+                    onMouseOut: function onMouseOut() {
+                      _this2.setState({
+                        disabled: false,
+                      });
+                    },
+                    onMouseDown: function onMouseDown(e) {
+                      e.cancelable = true;
+                    },
+                    // fix eslintjsx-a11y/mouse-events-have-key-events
+                    // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
+                    onFocus: function onFocus() {},
+                    onBlur: function onBlur() {},
+                    children: this.props.title,
+                  }),
                 },
                 restProps,
               ),
               {},
               {
                 modalRender: function modalRender(modal) {
-                  return /*#__PURE__*/ _react.default.createElement(
-                    _reactDraggable.default,
-                    {
-                      disabled: !_this2.state.disabled,
-                      bounds: bounds,
-                      onStart: function onStart(event, uiData) {
-                        _this2.onStart(event, uiData);
-                      },
+                  return (0, _jsxRuntime.jsx)(_reactDraggable.default, {
+                    disabled: !_this2.state.disabled,
+                    bounds: bounds,
+                    onStart: function onStart(event, uiData) {
+                      _this2.onStart(event, uiData);
                     },
-                    /*#__PURE__*/ _react.default.createElement(
-                      'div',
-                      {
-                        ref: _this2.draggleRef,
-                      },
-                      modal,
-                    ),
-                  );
+                    children: (0, _jsxRuntime.jsx)('div', {
+                      ref: _this2.draggleRef,
+                      children: modal,
+                    }),
+                  });
                 },
+                children: this.props.children,
               },
             ),
-            this.props.children,
           ),
-        );
+        });
       },
     },
   ]);

@@ -1,6 +1,6 @@
-import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
-import _notification from 'antd/es/notification';
 import 'antd/es/notification/style';
+import _notification from 'antd/es/notification';
+import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
 var keyArr = []; // 存放通知框的key
 
 var delayArr = [8, 5, 2]; // 延时数组

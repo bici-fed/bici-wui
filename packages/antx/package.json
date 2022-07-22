@@ -14,8 +14,10 @@
   "files": [
     "lib",
     "es",
-    "src",
     "dist"
+  ],
+  "sideEffects": [
+    "*.less"
   ],
   "publishConfig": {
     "access": "public"

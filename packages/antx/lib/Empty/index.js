@@ -13,7 +13,7 @@ require('antd/es/empty/style');
 
 var _empty = _interopRequireDefault(require('antd/es/empty'));
 
-var _react = _interopRequireDefault(require('react'));
+var _jsxRuntime = require('react/jsx-runtime');
 
 var _networkerror = _interopRequireDefault(require('./images/networkerror.png'));
 
@@ -55,128 +55,101 @@ var Empty = function Empty(props) {
   var emptyMap = {
     default: {
       image: _empty.default.PRESENTED_IMAGE_SIMPLE,
-      description: /*#__PURE__*/ _react.default.createElement(
-        'p',
-        {
-          style: style,
-        },
-        '\u6682\u65E0\u6570\u636E',
-      ),
+      description: (0, _jsxRuntime.jsx)('p', {
+        style: style,
+        children: '\u6682\u65E0\u6570\u636E',
+      }),
     },
     searchResultEmpty: {
       image: _searchResultEmpty.default,
-      description: /*#__PURE__*/ _react.default.createElement(
-        'p',
-        {
-          style: style,
-        },
-        '\u6682\u65E0\u641C\u7D22\u7ED3\u679C',
-      ),
+      description: (0, _jsxRuntime.jsx)('p', {
+        style: style,
+        children: '\u6682\u65E0\u641C\u7D22\u7ED3\u679C',
+      }),
     },
     addDevice: {
       image: _adddevice.default,
-      description: /*#__PURE__*/ _react.default.createElement(
-        'p',
-        {
-          style: style,
-        },
-        '\u8BF7\u6DFB\u52A0\u8BBE\u5907',
-      ),
+      description: (0, _jsxRuntime.jsx)('p', {
+        style: style,
+        children: '\u8BF7\u6DFB\u52A0\u8BBE\u5907',
+      }),
     },
     noHistoryTrend: {
       image: _noHistoryTrend.default,
-      description: /*#__PURE__*/ _react.default.createElement(
-        _react.default.Fragment,
-        null,
-        /*#__PURE__*/ _react.default.createElement(
-          'p',
-          {
+      description: (0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+        children: [
+          (0, _jsxRuntime.jsx)('p', {
             style: style,
-          },
-          '\u6682\u65E0\u5386\u53F2\u8D8B\u52BF\u5206\u6790\u56FE',
-        ),
-        /*#__PURE__*/ _react.default.createElement(
-          'p',
-          {
+            children: '\u6682\u65E0\u5386\u53F2\u8D8B\u52BF\u5206\u6790\u56FE',
+          }),
+          (0, _jsxRuntime.jsx)('p', {
             style: childStyle,
-          },
-          '\u8BF7\u5148\u5728\u4E0A\u65B9\u9009\u62E9\u67E5\u8BE2\u6761\u4EF6',
-        ),
-      ),
+            children: '\u8BF7\u5148\u5728\u4E0A\u65B9\u9009\u62E9\u67E5\u8BE2\u6761\u4EF6',
+          }),
+        ],
+      }),
     },
     noFile: {
       image: _nofile.default,
-      description: /*#__PURE__*/ _react.default.createElement(
-        'p',
-        {
-          style: style,
-        },
-        '\u6682\u65E0\u76F8\u5173\u6587\u4EF6',
-      ),
+      description: (0, _jsxRuntime.jsx)('p', {
+        style: style,
+        children: '\u6682\u65E0\u76F8\u5173\u6587\u4EF6',
+      }),
     },
     equipmentWorkWell: {
       image: _equipmentWorkWell.default,
-      description: /*#__PURE__*/ _react.default.createElement(
-        'p',
-        {
-          style: style,
-        },
-        '\u6682\u65E0\u76F8\u5173\u6587\u4EF6',
-      ),
+      description: (0, _jsxRuntime.jsx)('p', {
+        style: style,
+        children: '\u6682\u65E0\u76F8\u5173\u6587\u4EF6',
+      }),
     },
     noMessage: {
       image: _nomessage.default,
-      description: /*#__PURE__*/ _react.default.createElement(
-        'p',
-        {
-          style: style,
-        },
-        '\u6682\u65E0\u65B0\u6D88\u606F',
-      ),
+      description: (0, _jsxRuntime.jsx)('p', {
+        style: style,
+        children: '\u6682\u65E0\u65B0\u6D88\u606F',
+      }),
     },
     associatedCockpit: {
       image: _associatedCockpit.default,
-      description: /*#__PURE__*/ _react.default.createElement(
-        'p',
-        {
-          style: style,
-        },
-        '\u8BF7\u5148\u5173\u8054\u6570\u5B57\u9A7E\u9A76\u8231',
-      ),
+      description: (0, _jsxRuntime.jsx)('p', {
+        style: style,
+        children: '\u8BF7\u5148\u5173\u8054\u6570\u5B57\u9A7E\u9A76\u8231',
+      }),
     },
     networkOff: {
       image: _networkerror.default,
-      description: /*#__PURE__*/ _react.default.createElement(
-        _react.default.Fragment,
-        null,
-        /*#__PURE__*/ _react.default.createElement(
-          'p',
-          {
+      description: (0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+        children: [
+          (0, _jsxRuntime.jsx)('p', {
             style: style,
-          },
-          '\u7F51\u7EDC\u8FDE\u63A5\u65AD\u5F00',
-        ),
-        /*#__PURE__*/ _react.default.createElement(
-          'p',
-          {
+            children: '\u7F51\u7EDC\u8FDE\u63A5\u65AD\u5F00',
+          }),
+          (0, _jsxRuntime.jsx)('p', {
             style: childStyle,
-          },
-          '\u8BF7\u68C0\u67E5\u7F51\u7EDC\u8BBE\u7F6E\uFF0C\u91CD\u65B0\u5237\u65B0\u9875\u9762',
-        ),
-      ),
+            children:
+              '\u8BF7\u68C0\u67E5\u7F51\u7EDC\u8BBE\u7F6E\uFF0C\u91CD\u65B0\u5237\u65B0\u9875\u9762',
+          }),
+        ],
+      }),
     },
   };
-  return /*#__PURE__*/ _react.default.createElement(
+  return (0, _jsxRuntime.jsx)(
     _empty.default,
     (0, _objectSpread2.default)(
-      {
-        imageStyle: {
-          height: type !== 'default' ? 144 : 60,
+      (0, _objectSpread2.default)(
+        {
+          imageStyle: {
+            height: type !== 'default' ? 144 : 60,
+          },
         },
+        emptyMap[type],
+      ),
+      {},
+      {
+        children: props.children,
       },
-      emptyMap[type],
     ),
-    props.children,
   );
 };
 

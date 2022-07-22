@@ -15,6 +15,8 @@ var _extends2 = _interopRequireDefault(require('@babel/runtime/helpers/extends')
 
 var _slicedToArray2 = _interopRequireDefault(require('@babel/runtime/helpers/slicedToArray'));
 
+var _jsxRuntime = require('react/jsx-runtime');
+
 var _masonic = require('masonic');
 
 var _miniVirtualList = require('mini-virtual-list');
@@ -87,29 +89,32 @@ var BrickWall = function BrickWall(props) {
     };
 
     var renderDrag = function renderDrag(item, children) {
-      return /*#__PURE__*/ React.createElement(_drag.Acceptor, {
-        key: item.type,
-        name: item.id,
-        data: item,
-        type: 'card',
-        role: 'card',
-        onHover: function onHover() {},
-        content: /*#__PURE__*/ React.createElement(_drag.Dragger, {
+      return (0, _jsxRuntime.jsx)(
+        _drag.Acceptor,
+        {
           name: item.id,
           data: item,
           type: 'card',
           role: 'card',
-          content: children,
-          onDragFinished: function onDragFinished(source, target) {
-            props.onDragFinished && props.onDragFinished(source, target);
+          onHover: function onHover() {},
+          content: (0, _jsxRuntime.jsx)(_drag.Dragger, {
+            name: item.id,
+            data: item,
+            type: 'card',
+            role: 'card',
+            content: children,
+            onDragFinished: function onDragFinished(source, target) {
+              props.onDragFinished && props.onDragFinished(source, target);
 
-            if (target) {
-              handleDrag(source.data.index, target.data.index);
-            }
-          },
-        }),
-        styleType: 'border',
-      });
+              if (target) {
+                handleDrag(source.data.index, target.data.index);
+              }
+            },
+          }),
+          styleType: 'border',
+        },
+        item.type,
+      );
     };
 
     return draggable
@@ -122,22 +127,16 @@ var BrickWall = function BrickWall(props) {
               width: width,
             },
           ),
-          /*#__PURE__*/ React.createElement(CardItem, (0, _objectSpread2.default)({}, data)),
+          (0, _jsxRuntime.jsx)(CardItem, (0, _objectSpread2.default)({}, data)),
         )
-      : /*#__PURE__*/ React.createElement(CardItem, null);
+      : (0, _jsxRuntime.jsx)(CardItem, {});
   };
 
-  return /*#__PURE__*/ React.createElement(
-    _reactDnd.DndProvider,
-    {
-      backend: _reactDndHtml5Backend.HTML5Backend,
-    },
-    /*#__PURE__*/ React.createElement(
-      'div',
-      {
-        ref: containerRef,
-      },
-      (0, _masonic.useMasonry)({
+  return (0, _jsxRuntime.jsx)(_reactDnd.DndProvider, {
+    backend: _reactDndHtml5Backend.HTML5Backend,
+    children: (0, _jsxRuntime.jsx)('div', {
+      ref: containerRef,
+      children: (0, _masonic.useMasonry)({
         positioner: positioner,
         resizeObserver: resizeObserver,
         scrollTop: scrollTop,
@@ -148,8 +147,8 @@ var BrickWall = function BrickWall(props) {
         overscanBy: 1,
         render: MasonryCard,
       }),
-    ),
-  );
+    }),
+  });
 };
 
 var _default = BrickWall;

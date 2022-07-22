@@ -1,0 +1,32 @@
+{
+  "name": "@bici-wui/components",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "jufeng <jufeng@bicitech.cn>",
+  "homepage": "https://github.com/bici-fed/bici-wui#readme",
+  "license": "ISC",
+  "main": "lib/components.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/bici-fed/bici-wui.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/bici-fed/bici-wui/issues"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.16.3",
+    "@bici-wui/antx": "^1.0.6",
+    "@bici-wui/bus-components": "^1.0.6",
+    "@bici-wui/utils": "^1.0.2"
+  }
+}

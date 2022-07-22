@@ -1,16 +1,17 @@
+import 'antd/es/upload/style';
+import _Upload from 'antd/es/upload';
+import _regeneratorRuntime from '@babel/runtime/helpers/esm/regeneratorRuntime';
 import _asyncToGenerator from '@babel/runtime/helpers/esm/asyncToGenerator';
 import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
-import _regeneratorRuntime from '@babel/runtime/helpers/esm/regeneratorRuntime';
 import _slicedToArray from '@babel/runtime/helpers/esm/slicedToArray';
-import _Upload from 'antd/es/upload';
-import 'antd/es/upload/style';
-
+import { jsx as _jsx } from 'react/jsx-runtime';
 /**
  * 文件上传
  */
+
+import { useState } from 'react';
 import 'antd/es/upload/style';
-import React, { useState } from 'react';
-import { downloadById, fetchUpload, fileDelete } from './util';
+import { downloadById, fileDelete, fetchUpload } from './util';
 
 var BiciUpload = function BiciUpload(props) {
   var _useState = useState([]),
@@ -284,7 +285,16 @@ var BiciUpload = function BiciUpload(props) {
       showRemoveIcon: true,
     },
   };
-  return /*#__PURE__*/ React.createElement(_Upload, _objectSpread({}, uploadProps), props.children);
+  return _jsx(
+    _Upload,
+    _objectSpread(
+      _objectSpread({}, uploadProps),
+      {},
+      {
+        children: props.children,
+      },
+    ),
+  );
 };
 
 export default BiciUpload;

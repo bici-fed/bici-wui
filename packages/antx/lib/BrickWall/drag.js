@@ -9,6 +9,8 @@ exports.dragToList = exports.dragList = exports.Dragger = exports.Acceptor = voi
 
 var _slicedToArray2 = _interopRequireDefault(require('@babel/runtime/helpers/slicedToArray'));
 
+var _jsxRuntime = require('react/jsx-runtime');
+
 var _react = _interopRequireDefault(require('react'));
 
 var _reactDnd = require('react-dnd');
@@ -57,18 +59,15 @@ var Dragger = function Dragger(option) {
     dragRef: drag,
   });
 
-  return /*#__PURE__*/ _react.default.createElement(
-    'div',
-    {
-      ref: preview,
-      role: option.role,
-      style: {
-        opacity: opacity,
-      },
-      'data-id': ''.concat(option.name),
+  return (0, _jsxRuntime.jsx)('div', {
+    ref: preview,
+    role: option.role,
+    style: {
+      opacity: opacity,
     },
-    r,
-  );
+    'data-id': ''.concat(option.name),
+    children: r,
+  });
 };
 
 exports.Dragger = Dragger;
@@ -117,22 +116,19 @@ var Acceptor = function Acceptor(option) {
     boxShadow = '0px 0px 8px rgba(0, 0, 0, 0.2)';
   }
 
-  return /*#__PURE__*/ _react.default.createElement(
-    'div',
-    {
-      ref: drop,
-      role: 'Acceptor',
-      style:
-        styleType === 'background'
-          ? {
-              backgroundColor: backgroundColor,
-            }
-          : {
-              boxShadow: boxShadow,
-            },
-    },
-    option.content,
-  );
+  return (0, _jsxRuntime.jsx)('div', {
+    ref: drop,
+    role: 'Acceptor',
+    style:
+      styleType === 'background'
+        ? {
+            backgroundColor: backgroundColor,
+          }
+        : {
+            boxShadow: boxShadow,
+          },
+    children: option.content,
+  });
 }; //同一list之间拖动
 
 exports.Acceptor = Acceptor;
