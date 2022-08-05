@@ -1,16 +1,16 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 exports.default = void 0;
 
-var _jsxRuntime = require('react/jsx-runtime');
+var _jsxRuntime = require("react/jsx-runtime");
 
 var _default = function _default(_ref) {
   var title = _ref.title;
-  return (0, _jsxRuntime.jsx)('h1', {
-    children: title,
+  return (0, _jsxRuntime.jsx)("h1", {
+    children: title
   });
 };
 

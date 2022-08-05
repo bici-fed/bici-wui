@@ -10,8 +10,8 @@ export var downloadById = function downloadById(params) {
       requestInterceptors: function requestInterceptors(config) {
         console.log('单个拦截器');
         return config;
-      },
-    },
+      }
+    }
   });
 }; // 删除附件
 
@@ -20,7 +20,7 @@ export var fileDelete = function fileDelete(params) {
     url: '/file/service/file/delete',
     method: 'get',
     data: params,
-    quiet: true,
+    quiet: true
   });
 };
 export var fetchUpload = function fetchUpload(action, params, token) {
@@ -33,10 +33,10 @@ export var fetchUpload = function fetchUpload(action, params, token) {
       requestInterceptors: function requestInterceptors(config) {
         console.log('单个拦截器', config);
         config.headers = {
-          token: token,
+          token: token
         };
         return config;
-      },
-    },
+      }
+    }
   });
 };

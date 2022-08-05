@@ -18,4 +18,20 @@ export default defineConfig({
       },
     ],
   ],
+  webpack5: {},
+  theme:{
+    '@ant-prefix':'mart',
+  },
+  antd: {
+    config: {
+      prefixCls: 'mart',
+    },
+  },
+  // exportStatic: {},// 做静态化，即让每个都生成index。html
+  lessLoader:{
+    modifyVars: {
+      'ant-prefix':'mart',
+    },
+    javascriptEnabled: true,
+  }
 });

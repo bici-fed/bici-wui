@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { AcceptorProps, DragProps } from './typing';
 
@@ -22,48 +22,59 @@ export const Dragger = (option: DragProps) => {
       handlerId: monitor.getHandlerId(),
     }),
   }));
+
   const opacity = isDragging ? 0 : 1;
+  const display = isDragging ? 'none' : 'block';
 
   const r = React.cloneElement(option.content, { dragRef: drag });
 
   return (
-    <div ref={preview} role={option.role} style={{ opacity }} data-id={`${option.name}`}>
+    <div ref={preview} role={option.role} style={{ opacity, display }} data-id={`${option.name}`}>
       {r}
     </div>
   );
 };
 export const Acceptor = (option: AcceptorProps) => {
-  const { name, data, type, styleType, onHover } = option;
+  const { name, type, styleType, onHover, onActive } = option;
+  let dataIndex = useRef(null);
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: type,
-    drop: () => option,
-    hover: () => {
+    drop: (item, monitor) => {
+      return option;
+    },
+    hover: (item: any, monitor) => {
+      dataIndex.current = item?.data.index;
       if (onHover) {
         onHover();
       }
     },
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
+    collect: (monitor) => {
+      return {
+        isOver: monitor.isOver(),
+        canDrop: monitor.canDrop(),
+      };
+    },
   }));
 
   const isActive = canDrop && isOver;
-  let backgroundColor = '#fff';
-  let boxShadow = '0 0px 8px rgba(0, 0, 0, 0)';
+
+  // 默认
+  let boxShadow = '';
+  let opacity = 1;
   if (isActive) {
-    backgroundColor = 'antiquewhite';
+    // 此时可以替换元素
     boxShadow = '0 0px 8px rgba(0, 0, 0, 0.3)';
+    opacity = 0;
+    if (onActive) {
+      onActive(dataIndex.current);
+    }
   } else if (canDrop) {
-    backgroundColor = '#fff';
-    boxShadow = '0px 0px 8px rgba(0, 0, 0, 0.2)';
+    // 表示可以放置
+    boxShadow = '0px 0px 8px rgba(0, 0, 0, 0.8)';
+    opacity = 1;
   }
   return (
-    <div
-      ref={drop}
-      role={'Acceptor'}
-      style={styleType === 'background' ? { backgroundColor } : { boxShadow }}
-    >
+    <div ref={drop} role={'Acceptor'} style={{ opacity }}>
       {option.content}
     </div>
   );

@@ -1,22 +1,22 @@
-import 'antd/es/notification/style';
-import _notification from 'antd/es/notification';
-import _objectSpread from '@babel/runtime/helpers/esm/objectSpread2';
+import "antd/es/notification/style";
+import _notification from "antd/es/notification";
+import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
+import "antd/es/config-provider/style";
+import _ConfigProvider from "antd/es/config-provider";
 var keyArr = []; // 存放通知框的key
 
 var delayArr = [8, 5, 2]; // 延时数组
+
+_ConfigProvider.config({
+  prefixCls: 'mart'
+});
 
 var handleNotificationOpen = function handleNotificationOpen(type, config) {
   var getNewConfig = function getNewConfig() {
     // 根据是否传入description饭后新的配置项
     if (config.description) {
       return config;
-    } else if (
-      (!config.description && type === 'success') ||
-      type === 'error' ||
-      type === 'warn' ||
-      type === 'info' ||
-      type === 'warning'
-    ) {
+    } else if (!config.description && type === 'success' || type === 'error' || type === 'warn' || type === 'info' || type === 'warning') {
       config.description = ' ';
       return config;
     } else {
@@ -27,13 +27,10 @@ var handleNotificationOpen = function handleNotificationOpen(type, config) {
 
   var newConfig = getNewConfig();
 
-  var keyItem = _objectSpread(
-    {
-      key: ''.concat(Date.now()),
-      notyType: type,
-    },
-    newConfig,
-  );
+  var keyItem = _objectSpread({
+    key: "".concat(Date.now()),
+    notyType: type
+  }, newConfig);
 
   keyArr.push(keyItem); // 当超过 3 个消息时，顶掉最早的消息
 
@@ -45,7 +42,7 @@ var handleNotificationOpen = function handleNotificationOpen(type, config) {
 
   keyArr.forEach(function (item, index) {
     var key = item.key,
-      disableAutoClosed = item.disableAutoClosed; // 设置延时关闭时间
+        disableAutoClosed = item.disableAutoClosed; // 设置延时关闭时间
 
     var toSetDuration = null; // AntD: 默认 4.5 秒后自动关闭，配置为 null 则不自动关闭
 
@@ -59,22 +56,18 @@ var handleNotificationOpen = function handleNotificationOpen(type, config) {
       }
     }
 
-    var distConfig = _objectSpread(
-      {
-        placement: 'topRight',
-        duration: toSetDuration,
-        onClose: function onClose() {
-          var toDeleteIndex = keyArr.findIndex(function (obj) {
-            return obj.key === key;
-          });
-          keyArr.splice(toDeleteIndex, 1);
-        },
-      },
-      item,
-    );
+    var distConfig = _objectSpread({
+      placement: 'topRight',
+      duration: toSetDuration,
+      onClose: function onClose() {
+        var toDeleteIndex = keyArr.findIndex(function (obj) {
+          return obj.key === key;
+        });
+        keyArr.splice(toDeleteIndex, 1);
+      }
+    }, item);
 
-    switch (
-      item.notyType // 根据类型打开不同样式的消息通知
+    switch (item.notyType // 根据类型打开不同样式的消息通知
     ) {
       case 'open':
         _notification.open(distConfig);
@@ -121,6 +114,6 @@ var Notification = {
   error: handleNotificationOpen.bind(this, 'error'),
   warn: handleNotificationOpen.bind(this, 'warn'),
   warning: handleNotificationOpen.bind(this, 'warning'),
-  close: handleNotificationOpen.bind(this, 'close'),
+  close: handleNotificationOpen.bind(this, 'close')
 };
 export default Notification;

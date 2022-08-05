@@ -2,7 +2,7 @@
  * 文件上传
  */
 import React, { useState } from 'react';
-import { Upload, Button, message } from 'antd';
+import { Upload, ConfigProvider } from 'antd';
 import type { RcFile, UploadFile, UploadProps } from 'antd/es/upload/interface';
 import { UploadOutlined } from '@ant-design/icons';
 import 'antd/es/upload/style';
@@ -147,7 +147,11 @@ const BiciUpload: React.FC<WuiUploadProps<UploadProps>> = (props) => {
     },
   };
 
-  return <Upload {...uploadProps}>{props.children}</Upload>;
+  return (
+    <ConfigProvider prefixCls="mart">
+      <Upload {...uploadProps}>{props.children}</Upload>
+    </ConfigProvider>
+  );
 };
 
 export default BiciUpload;

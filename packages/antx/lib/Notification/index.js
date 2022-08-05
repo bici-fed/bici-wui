@@ -1,34 +1,36 @@
-'use strict';
+"use strict";
 
-var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault').default;
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault").default;
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 exports.default = void 0;
 
-require('antd/es/notification/style');
+require("antd/es/notification/style");
 
-var _notification2 = _interopRequireDefault(require('antd/es/notification'));
+var _notification2 = _interopRequireDefault(require("antd/es/notification"));
 
-var _objectSpread2 = _interopRequireDefault(require('@babel/runtime/helpers/objectSpread2'));
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread2"));
+
+require("antd/es/config-provider/style");
+
+var _configProvider = _interopRequireDefault(require("antd/es/config-provider"));
 
 var keyArr = []; // 存放通知框的key
 
 var delayArr = [8, 5, 2]; // 延时数组
+
+_configProvider.default.config({
+  prefixCls: 'mart'
+});
 
 var handleNotificationOpen = function handleNotificationOpen(type, config) {
   var getNewConfig = function getNewConfig() {
     // 根据是否传入description饭后新的配置项
     if (config.description) {
       return config;
-    } else if (
-      (!config.description && type === 'success') ||
-      type === 'error' ||
-      type === 'warn' ||
-      type === 'info' ||
-      type === 'warning'
-    ) {
+    } else if (!config.description && type === 'success' || type === 'error' || type === 'warn' || type === 'info' || type === 'warning') {
       config.description = ' ';
       return config;
     } else {
@@ -38,13 +40,10 @@ var handleNotificationOpen = function handleNotificationOpen(type, config) {
   };
 
   var newConfig = getNewConfig();
-  var keyItem = (0, _objectSpread2.default)(
-    {
-      key: ''.concat(Date.now()),
-      notyType: type,
-    },
-    newConfig,
-  );
+  var keyItem = (0, _objectSpread2.default)({
+    key: "".concat(Date.now()),
+    notyType: type
+  }, newConfig);
   keyArr.push(keyItem); // 当超过 3 个消息时，顶掉最早的消息
 
   if (keyArr.length > 3) {
@@ -55,7 +54,7 @@ var handleNotificationOpen = function handleNotificationOpen(type, config) {
 
   keyArr.forEach(function (item, index) {
     var key = item.key,
-      disableAutoClosed = item.disableAutoClosed; // 设置延时关闭时间
+        disableAutoClosed = item.disableAutoClosed; // 设置延时关闭时间
 
     var toSetDuration = null; // AntD: 默认 4.5 秒后自动关闭，配置为 null 则不自动关闭
 
@@ -69,22 +68,18 @@ var handleNotificationOpen = function handleNotificationOpen(type, config) {
       }
     }
 
-    var distConfig = (0, _objectSpread2.default)(
-      {
-        placement: 'topRight',
-        duration: toSetDuration,
-        onClose: function onClose() {
-          var toDeleteIndex = keyArr.findIndex(function (obj) {
-            return obj.key === key;
-          });
-          keyArr.splice(toDeleteIndex, 1);
-        },
-      },
-      item,
-    );
+    var distConfig = (0, _objectSpread2.default)({
+      placement: 'topRight',
+      duration: toSetDuration,
+      onClose: function onClose() {
+        var toDeleteIndex = keyArr.findIndex(function (obj) {
+          return obj.key === key;
+        });
+        keyArr.splice(toDeleteIndex, 1);
+      }
+    }, item);
 
-    switch (
-      item.notyType // 根据类型打开不同样式的消息通知
+    switch (item.notyType // 根据类型打开不同样式的消息通知
     ) {
       case 'open':
         _notification2.default.open(distConfig);
@@ -131,7 +126,7 @@ var Notification = {
   error: handleNotificationOpen.bind(void 0, 'error'),
   warn: handleNotificationOpen.bind(void 0, 'warn'),
   warning: handleNotificationOpen.bind(void 0, 'warning'),
-  close: handleNotificationOpen.bind(void 0, 'close'),
+  close: handleNotificationOpen.bind(void 0, 'close')
 };
 var _default = Notification;
 exports.default = _default;

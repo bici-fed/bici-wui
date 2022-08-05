@@ -1,0 +1,171 @@
+@root-entry-name: 'default';
+@import (reference) '~antd/es/style/themes/index.less';
+
+@wui-prefix-cls: ~'@{ant-prefix}-wui';
+
+
+.@{ant-prefix}-tabs-top > .@{ant-prefix}-tabs-nav:before,
+.@{ant-prefix}-tabs-bottom > .@{ant-prefix}-tabs-nav:before,
+.@{ant-prefix}-tabs-top > div > .@{ant-prefix}-tabs-nav:before,
+.@{ant-prefix}-tabs-bottom > div > .@{ant-prefix}-tabs-nav:before {
+  position: absolute;
+  right: 0;
+  left: 0;
+  border-bottom: 1px solid #fff;
+  content: '';
+}
+
+.@{wui-prefix-cls}-tab{
+  height:40px;
+  display: inline-flex;
+  flex-direction: row;
+  cursor: pointer;
+  .content{
+    min-width: 50px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    line-height: 40px;
+    padding: 0 10px;
+    .@{ant-prefix}-tabs-tab{
+      padding: 0;
+      background: transparent;
+      border: none;
+    }
+    .@{ant-prefix}-tabs-tab-btn{
+      transition: none;
+      color: #000;
+    }
+    .@{ant-prefix}-tabs-tab-btn:active,
+    .@{ant-prefix}-tabs-tab-btn:link,
+    .@{ant-prefix}-tabs-tab-btn:focus,
+    .@{ant-prefix}-tabs-tab-btn:hover,
+    .@{ant-prefix}-tabs-tab-btn:visited{
+      color: #000;
+    }
+  }
+  .prefix {
+    width: 20px;
+    position: relative;
+    pointer-events: none;
+    user-select: none;
+    .prefix-top{
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: -10px;
+      top: 10px;
+      border-right: 20px solid transparent;
+      border-left: 20px solid #ccc;
+      border-bottom: 20px solid transparent;
+      transform: rotate(90deg);
+      transform-origin: center;
+    }
+    .prefix-top:before{
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: -19px;
+      top: -1px;
+      border-right: 19px solid transparent;
+      border-left: 19px solid #fff;
+      border-bottom: 19px solid transparent;
+    }
+    .prefix-bottom{
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: -20px;
+      top: 20px;
+      border-right: 20px solid transparent;
+      border-left: 20px solid #ccc;
+      border-bottom: 20px solid transparent;
+      transform: rotateY(180deg) rotateX(180deg);
+      transform-origin: center;
+     }
+    .prefix-bottom:before{
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: -21px;
+      top: 1px;
+      border-right: 19px solid transparent;
+      border-left: 19px solid #fff;
+      border-bottom: 19px solid transparent;
+    }
+  }
+  .suffix{
+    position: relative;
+    width: 0;
+    height: 0;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #ccc;
+    border-top: 20px solid transparent;
+  }
+  .suffix:before{
+    content: '';
+    position: absolute;
+    top:-20px;
+    left: -21px;
+    width: 0;
+    height: 0;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #fff;
+    border-top: 20px solid transparent;
+  }
+}
+.@{wui-prefix-cls}-tab-active{
+  .content{
+    border-top: 1px solid #1890FF;
+    border-bottom: 1px solid #1890FF;
+    text-align: center;
+    line-height: 40px;
+    background: #1890FF;
+    color: #fff;
+    .@{ant-prefix}-tabs-tab-btn{
+      color: #fff;
+    }
+    .@{ant-prefix}-tabs-tab-btn:active,
+    .@{ant-prefix}-tabs-tab-btn:link,
+    .@{ant-prefix}-tabs-tab-btn:focus,
+    .@{ant-prefix}-tabs-tab-btn:hover,
+    .@{ant-prefix}-tabs-tab-btn:visited{
+      color: #fff;
+    }
+  }
+  .prefix {
+    .prefix-top{
+      border-left-color: #1890FF;
+    }
+    .prefix-top:before{
+      border-left-color: #1890FF;
+    }
+    .prefix-bottom{
+      border-left-color: #1890FF;
+    }
+    .prefix-bottom:before{
+      border-left-color: #1890FF;
+    }
+  }
+  .suffix{
+    position: relative;
+    width: 0;
+    height: 0;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #1890FF;
+    border-top: 20px solid transparent;
+  }
+  .suffix:before{
+    content: '';
+    position: absolute;
+    top:-20px;
+    left: -21px;
+    width: 0;
+    height: 0;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #1890FF;
+    border-top: 20px solid transparent;
+  }
+}

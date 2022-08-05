@@ -3,4 +3,5 @@ import Empty from './Empty';
 import Modal from './Modal';
 import Notification from './Notification';
 import Upload from './Upload';
-export { BrickWall, Empty, Modal, Notification, Upload };
+import Tabs from './Tabs';
+export { BrickWall, Empty, Modal, Notification, Upload, Tabs };

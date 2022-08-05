@@ -19,4 +19,5 @@ export type AcceptorProps = {
   //     isActive:string
   // }
   onHover: Function; //移入区域.
+  onActive: Function; //当前可以放置.
 };

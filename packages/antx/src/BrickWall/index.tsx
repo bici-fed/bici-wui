@@ -60,6 +60,10 @@ const BrickWall = (props: BrickWallProps) => {
           type="card"
           role="card"
           onHover={() => {}}
+          onActive={(dataIndex: number) => {
+            let delIndex = dataIndex < index ? dataIndex : dataIndex + 1;
+            handleDrag(dataIndex, delIndex);
+          }}
           content={
             <Dragger
               name={item.id}

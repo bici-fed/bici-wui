@@ -2,12 +2,16 @@
  * @File: 消息通知
  */
 
-import { notification } from 'antd';
+import { notification, ConfigProvider } from 'antd';
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error' | 'warn';
 
 let keyArr: any[] = []; // 存放通知框的key
 const delayArr = [8, 5, 2]; // 延时数组
+
+ConfigProvider.config({
+  prefixCls: 'mart',
+})
 
 const handleNotificationOpen = (type: any, config: any) => {
   const getNewConfig = () => {

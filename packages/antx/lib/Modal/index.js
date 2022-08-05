@@ -1,51 +1,39 @@
-'use strict';
+"use strict";
 
-var _interopRequireDefault = require('@babel/runtime/helpers/interopRequireDefault').default;
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault").default;
 
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 exports.default = void 0;
 
-var _objectSpread2 = _interopRequireDefault(require('@babel/runtime/helpers/objectSpread2'));
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread2"));
 
-require('antd/es/modal/style');
+require("antd/es/modal/style");
 
-var _modal = _interopRequireDefault(require('antd/es/modal'));
+var _modal = _interopRequireDefault(require("antd/es/modal"));
 
-var _classCallCheck2 = _interopRequireDefault(require('@babel/runtime/helpers/classCallCheck'));
+require("antd/es/config-provider/style");
 
-var _createClass2 = _interopRequireDefault(require('@babel/runtime/helpers/createClass'));
+var _configProvider = _interopRequireDefault(require("antd/es/config-provider"));
 
-var _inherits2 = _interopRequireDefault(require('@babel/runtime/helpers/inherits'));
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _createSuper2 = _interopRequireDefault(require('@babel/runtime/helpers/createSuper'));
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _jsxRuntime = require('react/jsx-runtime');
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _lodash = _interopRequireDefault(require('lodash'));
+var _createSuper2 = _interopRequireDefault(require("@babel/runtime/helpers/createSuper"));
 
-var _react = _interopRequireDefault(require('react'));
+var _jsxRuntime = require("react/jsx-runtime");
 
-var _reactDraggable = _interopRequireDefault(require('react-draggable'));
+var _lodash = _interopRequireDefault(require("lodash"));
 
-var _uuid = require('../utils/uuid');
+var _react = _interopRequireDefault(require("react"));
 
-function parentUntil(ele, eleId) {
-  var parent = undefined;
+var _Drag = _interopRequireDefault(require("./Drag"));
 
-  do {
-    var pd = ele.parentNode || ele.parentElement;
-
-    if (document.getElementById(eleId) == pd) {
-      parent = pd;
-    }
-  } while (!parent);
-
-  return parent;
-}
-
-var Modal = /*#__PURE__*/ (function (_React$Component) {
+var Modal = /*#__PURE__*/function (_React$Component) {
   (0, _inherits2.default)(Modal, _React$Component);
 
   var _super = (0, _createSuper2.default)(Modal);
@@ -65,139 +53,58 @@ var Modal = /*#__PURE__*/ (function (_React$Component) {
         left: 0,
         top: 0,
         bottom: 0,
-        right: 0,
+        right: 0
       },
-      disabled: false,
+      disabled: false
     };
-    _this.id = (0, _uuid.s8)();
-    _this.draggleRef = /*#__PURE__*/ _react.default.createRef();
-    _this.titleRef = /*#__PURE__*/ _react.default.createRef();
+    _this.draggleRef = /*#__PURE__*/_react.default.createRef();
 
-    _this.onStart = function (event, uiData) {
-      var _this$draggleRef$curr;
-
-      var parentDom = event.target;
-
-      if (document.getElementById(_this.id) !== parentDom) {
-        parentDom = parentUntil(parentDom, _this.id);
-      }
-
-      if (_this.titleRef.current != parentDom) {
-        return;
-      }
-
-      var _window$document$docu = window.document.documentElement,
-        clientWidth = _window$document$docu.clientWidth,
-        clientHeight = _window$document$docu.clientHeight;
-      var targetRect =
-        (_this$draggleRef$curr = _this.draggleRef.current) === null ||
-        _this$draggleRef$curr === void 0
-          ? void 0
-          : _this$draggleRef$curr.getBoundingClientRect();
-
-      if (parentDom.dataset.drag !== 'yes') {
-        return;
-      }
-
-      if (!targetRect) {
-        return;
-      }
-
-      _this.setState({
-        bounds: {
-          left: -targetRect.left + uiData.x,
-          right: clientWidth - (targetRect.right - uiData.x),
-          top: -targetRect.top + uiData.y,
-          bottom: clientHeight - (targetRect.bottom - uiData.y),
-        },
-      });
+    _this.updateTransform = function (transformStr) {
+      _this.draggleRef.current.style.transform = transformStr;
     };
 
     return _this;
   }
 
-  (0, _createClass2.default)(Modal, [
-    {
-      key: 'componentDidMount',
-      value: function componentDidMount() {
-        this.setState({
-          disabled: this.props.draggable,
-        });
-      },
-    },
-    {
-      key: 'render',
-      value: function render() {
-        var _this2 = this;
+  (0, _createClass2.default)(Modal, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        disabled: this.props.draggable
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
 
-        var bounds = this.state.bounds;
+      var draggable = this.props.draggable;
 
-        var restProps = _lodash.default.omit(this.props, ['modalRender', 'title']);
+      var restProps = _lodash.default.omit(this.props, ['modalRender', 'title']);
 
-        var draggable = this.props.draggable;
-        return (0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
-          children: (0, _jsxRuntime.jsx)(
-            _modal.default,
-            (0, _objectSpread2.default)(
-              (0, _objectSpread2.default)(
-                {
-                  title: (0, _jsxRuntime.jsx)('div', {
-                    ref: this.titleRef,
-                    style: {
-                      width: '100%',
-                      cursor: draggable ? 'move' : 'default',
-                    },
-                    id: this.id,
-                    'data-drag': 'yes',
-                    onMouseOver: function onMouseOver() {
-                      if (_this2.props.draggable) {
-                        _this2.setState({
-                          disabled: true,
-                        });
-                      }
-                    },
-                    onMouseOut: function onMouseOut() {
-                      _this2.setState({
-                        disabled: false,
-                      });
-                    },
-                    onMouseDown: function onMouseDown(e) {
-                      e.cancelable = true;
-                    },
-                    // fix eslintjsx-a11y/mouse-events-have-key-events
-                    // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/mouse-events-have-key-events.md
-                    onFocus: function onFocus() {},
-                    onBlur: function onBlur() {},
-                    children: this.props.title,
-                  }),
-                },
-                restProps,
-              ),
-              {},
-              {
-                modalRender: function modalRender(modal) {
-                  return (0, _jsxRuntime.jsx)(_reactDraggable.default, {
-                    disabled: !_this2.state.disabled,
-                    bounds: bounds,
-                    onStart: function onStart(event, uiData) {
-                      _this2.onStart(event, uiData);
-                    },
-                    children: (0, _jsxRuntime.jsx)('div', {
-                      ref: _this2.draggleRef,
-                      children: modal,
-                    }),
-                  });
-                },
-                children: this.props.children,
-              },
-            ),
-          ),
-        });
-      },
-    },
-  ]);
+      return (0, _jsxRuntime.jsx)(_configProvider.default, {
+        prefixCls: "mart",
+        children: (0, _jsxRuntime.jsx)(_modal.default, (0, _objectSpread2.default)((0, _objectSpread2.default)({
+          title: draggable ? (0, _jsxRuntime.jsx)(_Drag.default, {
+            updateTransform: this.updateTransform,
+            children: (0, _jsxRuntime.jsx)("div", {
+              children: this.props.title
+            })
+          }) : this.props.title,
+          modalRender: function modalRender(modal) {
+            return (0, _jsxRuntime.jsx)("div", {
+              ref: _this2.draggleRef,
+              children: modal
+            });
+          }
+        }, restProps), {}, {
+          children: this.props.children
+        }))
+      });
+    }
+  }]);
   return Modal;
-})(_react.default.Component);
+}(_react.default.Component);
 
 var _default = Modal;
 exports.default = _default;

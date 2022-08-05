@@ -30,7 +30,7 @@ const ModalDemo = () => {
       <Modal
         draggable={true}
         width={1000}
-        title={<div>基本使用modal</div>}
+        title="基本使用modal"
         onCancel={handleCancel}
         onOk={handleOk}
         visible={visible}

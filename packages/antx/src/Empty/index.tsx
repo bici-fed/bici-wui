@@ -1,4 +1,4 @@
-import { Empty as ANTEmpty } from 'antd';
+import { Empty as ANTEmpty, ConfigProvider } from 'antd';
 import React from 'react';
 import { BiciEmptyProps } from './typing';
 // @ts-ignore
@@ -79,14 +79,16 @@ const Empty: React.FC<BiciEmptyProps> = (props) => {
     },
   };
   return (
-    <ANTEmpty
-      imageStyle={{
-        height: type !== 'default' ? 144 : 60,
-      }}
-      {...emptyMap[type]}
-    >
-      {props.children}
-    </ANTEmpty>
+    <ConfigProvider prefixCls="mart">
+      <ANTEmpty
+        imageStyle={{
+          height: type !== 'default' ? 144 : 60,
+        }}
+        {...emptyMap[type]}
+      >
+        {props.children}
+      </ANTEmpty>
+    </ConfigProvider>
   );
 };
 

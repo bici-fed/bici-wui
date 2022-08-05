@@ -8,7 +8,6 @@ const items = Array.from(Array(30), () => ({ id: i++, name: 'jufeng', text: 'hah
 const BrickWallDemo = () => {
   const [cards, setCards] = useState(items);
   const Card = (prop: any) => {
-    console.log(prop);
     return (
       <div style={{ boxSizing: 'border-box', border: '1px solid #ccc' }}>
         <div
