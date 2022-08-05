@@ -48,6 +48,12 @@ var BrickWall = function BrickWall(props) {
       scrollTop = _useScroller.scrollTop,
       isScrolling = _useScroller.isScrolling;
 
+  (0, React.useEffect)(function () {
+    setTimeout(function () {
+      var myEvent = new Event('resize');
+      window.dispatchEvent(myEvent);
+    }, 100);
+  }, []);
   var positioner = (0, _masonic.usePositioner)({
     width: width,
     columnWidth: columnWidth,

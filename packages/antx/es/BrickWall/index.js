@@ -8,6 +8,7 @@ import * as React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Acceptor, Dragger, dragList } from './drag';
+import { useEffect } from "react";
 
 var BrickWall = function BrickWall(props) {
   var _props$rowGutter = props.rowGutter,
@@ -28,6 +29,12 @@ var BrickWall = function BrickWall(props) {
       scrollTop = _useScroller.scrollTop,
       isScrolling = _useScroller.isScrolling;
 
+  useEffect(function () {
+    setTimeout(function () {
+      var myEvent = new Event('resize');
+      window.dispatchEvent(myEvent);
+    }, 100);
+  }, []);
   var positioner = usePositioner({
     width: width,
     columnWidth: columnWidth,
