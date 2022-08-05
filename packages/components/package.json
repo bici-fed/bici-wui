@@ -1,6 +1,6 @@
 {
   "name": "@bici-wui/components",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "> TODO: description",
   "author": "jufeng <jufeng@bicitech.cn>",
   "homepage": "https://github.com/bici-fed/bici-wui#readme",
@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.16.3",
-    "@bici-wui/antx": "^1.1.0",
-    "@bici-wui/bus-components": "^1.1.0",
+    "@bici-wui/antx": "^1.1.1",
+    "@bici-wui/bus-components": "^1.1.1",
     "@bici-wui/utils": "^1.1.0"
   },
   "gitHead": "0a3d71d48251f4e5e4d0eb7657e15506f0499fcc"
