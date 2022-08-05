@@ -4,6 +4,7 @@ import * as React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Acceptor, Dragger, dragList } from './drag';
+import {useEffect} from "react";
 
 type BrickWallProps = {
   /** 是否可以拖动排序*/
@@ -30,6 +31,13 @@ const BrickWall = (props: BrickWallProps) => {
   const { width, height } = useSize(containerRef);
 
   const { scrollTop, isScrolling } = useScroller(containerRef);
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      const myEvent = new Event('resize');
+      window.dispatchEvent(myEvent);
+    },100)
+  },[])
 
   const positioner = usePositioner({
     width,
@@ -62,7 +70,7 @@ const BrickWall = (props: BrickWallProps) => {
           onHover={() => {}}
           onActive={(dataIndex: number) => {
             let delIndex = dataIndex < index ? dataIndex : dataIndex + 1;
-            handleDrag(dataIndex, delIndex);
+           handleDrag(dataIndex, delIndex);
           }}
           content={
             <Dragger
