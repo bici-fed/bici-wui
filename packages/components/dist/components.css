@@ -1,50 +1,51 @@
-.ant-tabs-top > .ant-tabs-nav:before,
-.ant-tabs-bottom > .ant-tabs-nav:before,
-.ant-tabs-top > div > .ant-tabs-nav:before,
-.ant-tabs-bottom > div > .ant-tabs-nav:before {
+.mart-tabs-top > .mart-tabs-nav:before,
+.mart-tabs-bottom > .mart-tabs-nav:before,
+.mart-tabs-top > div > .mart-tabs-nav:before,
+.mart-tabs-bottom > div > .mart-tabs-nav:before {
   position: absolute;
   right: 0;
   left: 0;
   border-bottom: 1px solid #fff;
   content: '';
 }
-.ant-wui-tab {
+.mart-wui-tab {
   height: 40px;
   display: inline-flex;
   flex-direction: row;
   cursor: pointer;
 }
-.ant-wui-tab .content {
+.mart-wui-tab .content {
   min-width: 50px;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   text-align: center;
   line-height: 40px;
   padding: 0 10px;
+  background: #fff;
 }
-.ant-wui-tab .content .ant-tabs-tab {
+.mart-wui-tab .content .mart-tabs-tab {
   padding: 0;
   background: transparent;
   border: none;
 }
-.ant-wui-tab .content .ant-tabs-tab-btn {
+.mart-wui-tab .content .mart-tabs-tab-btn {
   transition: none;
   color: #000;
 }
-.ant-wui-tab .content .ant-tabs-tab-btn:active,
-.ant-wui-tab .content .ant-tabs-tab-btn:link,
-.ant-wui-tab .content .ant-tabs-tab-btn:focus,
-.ant-wui-tab .content .ant-tabs-tab-btn:hover,
-.ant-wui-tab .content .ant-tabs-tab-btn:visited {
+.mart-wui-tab .content .mart-tabs-tab-btn:active,
+.mart-wui-tab .content .mart-tabs-tab-btn:link,
+.mart-wui-tab .content .mart-tabs-tab-btn:focus,
+.mart-wui-tab .content .mart-tabs-tab-btn:hover,
+.mart-wui-tab .content .mart-tabs-tab-btn:visited {
   color: #000;
 }
-.ant-wui-tab .prefix {
+.mart-wui-tab .prefix {
   width: 20px;
   position: relative;
   pointer-events: none;
   user-select: none;
 }
-.ant-wui-tab .prefix .prefix-top {
+.mart-wui-tab .prefix .prefix-top {
   position: absolute;
   width: 0;
   height: 0;
@@ -56,7 +57,7 @@
   transform: rotate(90deg);
   transform-origin: center;
 }
-.ant-wui-tab .prefix .prefix-top:before {
+.mart-wui-tab .prefix .prefix-top:before {
   content: '';
   position: absolute;
   width: 0;
@@ -67,7 +68,7 @@
   border-left: 19px solid #fff;
   border-bottom: 19px solid transparent;
 }
-.ant-wui-tab .prefix .prefix-bottom {
+.mart-wui-tab .prefix .prefix-bottom {
   position: absolute;
   width: 0;
   height: 0;
@@ -79,7 +80,7 @@
   transform: rotateY(180deg) rotateX(180deg);
   transform-origin: center;
 }
-.ant-wui-tab .prefix .prefix-bottom:before {
+.mart-wui-tab .prefix .prefix-bottom:before {
   content: '';
   position: absolute;
   width: 0;
@@ -90,7 +91,7 @@
   border-left: 19px solid #fff;
   border-bottom: 19px solid transparent;
 }
-.ant-wui-tab .suffix {
+.mart-wui-tab .suffix {
   position: relative;
   width: 0;
   height: 0;
@@ -98,7 +99,7 @@
   border-left: 20px solid #ccc;
   border-top: 20px solid transparent;
 }
-.ant-wui-tab .suffix:before {
+.mart-wui-tab .suffix:before {
   content: '';
   position: absolute;
   top: -20px;
@@ -109,7 +110,7 @@
   border-left: 20px solid #fff;
   border-top: 20px solid transparent;
 }
-.ant-wui-tab-active .content {
+.mart-wui-tab-active .content {
   border-top: 1px solid #1890FF;
   border-bottom: 1px solid #1890FF;
   text-align: center;
@@ -117,29 +118,29 @@
   background: #1890FF;
   color: #fff;
 }
-.ant-wui-tab-active .content .ant-tabs-tab-btn {
+.mart-wui-tab-active .content .mart-tabs-tab-btn {
   color: #fff;
 }
-.ant-wui-tab-active .content .ant-tabs-tab-btn:active,
-.ant-wui-tab-active .content .ant-tabs-tab-btn:link,
-.ant-wui-tab-active .content .ant-tabs-tab-btn:focus,
-.ant-wui-tab-active .content .ant-tabs-tab-btn:hover,
-.ant-wui-tab-active .content .ant-tabs-tab-btn:visited {
+.mart-wui-tab-active .content .mart-tabs-tab-btn:active,
+.mart-wui-tab-active .content .mart-tabs-tab-btn:link,
+.mart-wui-tab-active .content .mart-tabs-tab-btn:focus,
+.mart-wui-tab-active .content .mart-tabs-tab-btn:hover,
+.mart-wui-tab-active .content .mart-tabs-tab-btn:visited {
   color: #fff;
 }
-.ant-wui-tab-active .prefix .prefix-top {
+.mart-wui-tab-active .prefix .prefix-top {
   border-left-color: #1890FF;
 }
-.ant-wui-tab-active .prefix .prefix-top:before {
+.mart-wui-tab-active .prefix .prefix-top:before {
   border-left-color: #1890FF;
 }
-.ant-wui-tab-active .prefix .prefix-bottom {
+.mart-wui-tab-active .prefix .prefix-bottom {
   border-left-color: #1890FF;
 }
-.ant-wui-tab-active .prefix .prefix-bottom:before {
+.mart-wui-tab-active .prefix .prefix-bottom:before {
   border-left-color: #1890FF;
 }
-.ant-wui-tab-active .suffix {
+.mart-wui-tab-active .suffix {
   position: relative;
   width: 0;
   height: 0;
@@ -147,7 +148,7 @@
   border-left: 20px solid #1890FF;
   border-top: 20px solid transparent;
 }
-.ant-wui-tab-active .suffix:before {
+.mart-wui-tab-active .suffix:before {
   content: '';
   position: absolute;
   top: -20px;

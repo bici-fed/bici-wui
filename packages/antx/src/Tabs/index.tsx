@@ -13,6 +13,7 @@ export interface WuiTabProps extends Omit<RcTabsProps, 'editable'> {
   maxWidth?: number;
   tabBarGutter?: number;
   activeKey?: string;
+  contentClassName?: string;
   onChange?: (newActiveKey: string) => void;
 }
 
@@ -25,7 +26,7 @@ function WuiTabs (props: WuiTabProps) {
     prefixCls:'bic',
   })
 
-  const {width, minWidth, maxWidth,tabBarGutter=2,onChange,activeKey} = props;
+  const {width, minWidth, maxWidth,contentClassName,tabBarGutter=2,onChange,activeKey, ...restProps} = props;
   // 重写tab
   const renderTabBar: TabsProps['renderTabBar'] = (tabBarProps, DefaultTabBar) => {
     const {activeKey, panes, tabBarGutter = 0} = tabBarProps;
@@ -59,6 +60,10 @@ function WuiTabs (props: WuiTabProps) {
             })
 
             const newNode = React.cloneElement(node,{},newChildren)
+            const contentClass = classnames({
+              content: true,
+              [`${contentClassName}`]: true,
+            })
 
             return (
               <div {...node.props} className={tabClass}
@@ -71,7 +76,7 @@ function WuiTabs (props: WuiTabProps) {
                     </div>
                   ) : null
                 }
-                <div className="content"
+                <div className={contentClass}
                      style={
                        isLast ? {borderRight: "1px solid #ccc",width, minWidth, maxWidth}
                          : isFirst ? {
@@ -94,6 +99,7 @@ function WuiTabs (props: WuiTabProps) {
   return (
     <ConfigProvider prefixCls="mart">
       <Tabs
+        {...restProps}
         type="editable-card"
         onChange={onChange}
         activeKey={activeKey}

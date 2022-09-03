@@ -1,9 +1,11 @@
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import _objectSpread from "@babel/runtime/helpers/esm/objectSpread2";
+import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
 import "antd/es/config-provider/style";
 import _ConfigProvider from "antd/es/config-provider";
 import "antd/es/tabs/style";
 import _Tabs from "antd/es/tabs";
+var _excluded = ["width", "minWidth", "maxWidth", "contentClassName", "tabBarGutter", "onChange", "activeKey"];
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { useContext } from 'react';
 import classnames from 'classnames';
@@ -23,10 +25,13 @@ function WuiTabs(props) {
   var width = props.width,
       minWidth = props.minWidth,
       maxWidth = props.maxWidth,
+      contentClassName = props.contentClassName,
       _props$tabBarGutter = props.tabBarGutter,
       tabBarGutter = _props$tabBarGutter === void 0 ? 2 : _props$tabBarGutter,
       onChange = props.onChange,
-      activeKey = props.activeKey; // 重写tab
+      activeKey = props.activeKey,
+      restProps = _objectWithoutProperties(props, _excluded); // 重写tab
+
 
   var renderTabBar = function renderTabBar(tabBarProps, DefaultTabBar) {
     var activeKey = tabBarProps.activeKey,
@@ -62,6 +67,9 @@ function WuiTabs(props) {
             return null;
           });
           var newNode = /*#__PURE__*/React.cloneElement(node, {}, newChildren);
+          var contentClass = classnames(_defineProperty({
+            content: true
+          }, "".concat(contentClassName), true));
           return _jsxs("div", _objectSpread(_objectSpread({}, node.props), {}, {
             className: tabClass,
             style: !isFirst ? {
@@ -75,7 +83,7 @@ function WuiTabs(props) {
                 className: "prefix-bottom"
               })]
             }) : null, _jsx("div", {
-              className: "content",
+              className: contentClass,
               style: isLast ? {
                 borderRight: "1px solid #ccc",
                 width: width,
@@ -104,7 +112,7 @@ function WuiTabs(props) {
 
   return _jsx(_ConfigProvider, {
     prefixCls: "mart",
-    children: _jsx(_Tabs, {
+    children: _jsx(_Tabs, _objectSpread(_objectSpread({}, restProps), {}, {
       type: "editable-card",
       onChange: onChange,
       activeKey: activeKey,
@@ -112,7 +120,7 @@ function WuiTabs(props) {
       renderTabBar: renderTabBar,
       tabBarGutter: -tabBarGutter,
       children: props.children
-    })
+    }))
   });
 }
 

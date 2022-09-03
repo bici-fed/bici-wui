@@ -7,6 +7,7 @@ export interface WuiTabProps extends Omit<RcTabsProps, 'editable'> {
     maxWidth?: number;
     tabBarGutter?: number;
     activeKey?: string;
+    contentClassName?: string;
     onChange?: (newActiveKey: string) => void;
 }
 declare function WuiTabs(props: WuiTabProps): JSX.Element;

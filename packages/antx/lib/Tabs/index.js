@@ -1,8 +1,8 @@
 "use strict";
 
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard").default;
-
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault").default;
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard").default;
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -12,6 +12,8 @@ exports.default = void 0;
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread2"));
+
+var _objectWithoutProperties2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutProperties"));
 
 require("antd/es/config-provider/style");
 
@@ -25,10 +27,11 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _classnames2 = _interopRequireDefault(require("classnames"));
+var _classnames3 = _interopRequireDefault(require("classnames"));
 
 require("./index.less");
 
+var _excluded = ["width", "minWidth", "maxWidth", "contentClassName", "tabBarGutter", "onChange", "activeKey"];
 var TabPane = _tabs.default.TabPane;
 
 function WuiTabs(props) {
@@ -44,10 +47,12 @@ function WuiTabs(props) {
   var width = props.width,
       minWidth = props.minWidth,
       maxWidth = props.maxWidth,
+      contentClassName = props.contentClassName,
       _props$tabBarGutter = props.tabBarGutter,
       tabBarGutter = _props$tabBarGutter === void 0 ? 2 : _props$tabBarGutter,
       onChange = props.onChange,
-      activeKey = props.activeKey; // 重写tab
+      activeKey = props.activeKey,
+      restProps = (0, _objectWithoutProperties2.default)(props, _excluded); // 重写tab
 
   var renderTabBar = function renderTabBar(tabBarProps, DefaultTabBar) {
     var activeKey = tabBarProps.activeKey,
@@ -63,7 +68,7 @@ function WuiTabs(props) {
         children: function children(node) {
           var _classnames;
 
-          var tabClass = (0, _classnames2.default)((_classnames = {}, (0, _defineProperty2.default)(_classnames, "".concat(prefix, "-tab"), true), (0, _defineProperty2.default)(_classnames, "".concat(prefix, "-tab-active"), node.key === activeKey), _classnames));
+          var tabClass = (0, _classnames3.default)((_classnames = {}, (0, _defineProperty2.default)(_classnames, "".concat(prefix, "-tab"), true), (0, _defineProperty2.default)(_classnames, "".concat(prefix, "-tab-active"), node.key === activeKey), _classnames));
           var isFirst = first.key === node.key;
           var isLast = last.key === node.key;
           var newWidth = width || maxWidth || minWidth;
@@ -86,6 +91,9 @@ function WuiTabs(props) {
 
           var newNode = /*#__PURE__*/_react.default.cloneElement(node, {}, newChildren);
 
+          var contentClass = (0, _classnames3.default)((0, _defineProperty2.default)({
+            content: true
+          }, "".concat(contentClassName), true));
           return (0, _jsxRuntime.jsxs)("div", (0, _objectSpread2.default)((0, _objectSpread2.default)({}, node.props), {}, {
             className: tabClass,
             style: !isFirst ? {
@@ -99,7 +107,7 @@ function WuiTabs(props) {
                 className: "prefix-bottom"
               })]
             }) : null, (0, _jsxRuntime.jsx)("div", {
-              className: "content",
+              className: contentClass,
               style: isLast ? {
                 borderRight: "1px solid #ccc",
                 width: width,
@@ -128,7 +136,7 @@ function WuiTabs(props) {
 
   return (0, _jsxRuntime.jsx)(_configProvider.default, {
     prefixCls: "mart",
-    children: (0, _jsxRuntime.jsx)(_tabs.default, {
+    children: (0, _jsxRuntime.jsx)(_tabs.default, (0, _objectSpread2.default)((0, _objectSpread2.default)({}, restProps), {}, {
       type: "editable-card",
       onChange: onChange,
       activeKey: activeKey,
@@ -136,7 +144,7 @@ function WuiTabs(props) {
       renderTabBar: renderTabBar,
       tabBarGutter: -tabBarGutter,
       children: props.children
-    })
+    }))
   });
 }
 
